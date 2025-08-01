@@ -3,11 +3,10 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: cloud-obara-dev-tls
-  namespace: kube-system
 spec:
   secretName: cloud-obara-dev-tls
   issuerRef:
-    name: letsencrypt-production
+    name: letsencrypt-private-key
     kind: ClusterIssuer
   commonName: "*.cloud.obara.dev"
   dnsNames:
