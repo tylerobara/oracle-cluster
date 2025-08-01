@@ -1,0 +1,14 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cloud-obara-dev-tls
+  namespace: traefik
+spec:
+  secretName: cloud-obara-dev-tls
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "*.cloud.obara.dev"
+  dnsNames:
+  - "*.cloud.obara.dev"
