@@ -7,9 +7,14 @@ spec:
     server: https://acme-v02.api.letsencrypt.org/directory
     email: tyler.obara@gmail.com
     privateKeySecretRef:
-      name: letsencrypt-production
+      name: letsencrypt-private-key
     solvers:
-      - http01:
-          ingress:
-            class: traefik
-        selector: {}
+      - dns01:
+          cloudflare:
+            email: tyler.obara@gmail.com
+            apiTokenSecretRef:
+              name: cloudflare-token-secret
+              key: cloudflare-token
+        selector:
+          dnsZones:
+            - "*.cloud.obara.xyz"

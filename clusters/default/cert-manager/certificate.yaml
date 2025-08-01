@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: cloud-obara-dev-tls
   issuerRef:
-    name: letsencrypt-private-key
+    name: letsencrypt
     kind: ClusterIssuer
   commonName: "*.cloud.obara.dev"
   dnsNames:
