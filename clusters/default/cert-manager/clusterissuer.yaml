@@ -17,4 +17,4 @@ spec:
               key: cloudflare-token
         selector:
           dnsZones:
-            - "*.cloud.obara.dev"
+            - "*.cloud.obara.xyz"
