@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://gitea.obara.xyz/tylerobara/oracle-cluster.git
+    repoURL: https://github.com/tylerobara/oracle-cluster.git
     path: apps/_base
     targetRevision: HEAD
     helm:
