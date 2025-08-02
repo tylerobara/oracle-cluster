@@ -16,7 +16,7 @@ spec:
   project: default
   revisionHistoryLimit: 0
   source:
-    repoURL: https://gitea.obara.xyz/tylerobara/k8slab.git
+    repoURL: https://github.com/tylerobara/oracle-cluster.git
     targetRevision: HEAD
     path: {{ $app.path | default (printf "apps/%s/%s" $group $name) }}
     {{- with $app.valueFiles }}
