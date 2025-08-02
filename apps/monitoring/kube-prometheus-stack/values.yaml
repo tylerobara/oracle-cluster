@@ -1,0 +1,84 @@
+prometheus-operator-crds:
+  crds:
+    annotations:
+      argocd.argoproj.io/sync-options: ServerSideApply=true 
+
+kube-prometheus-stack:
+  crds:
+    enabled: true
+
+  defaultRules:
+    rules:
+      kubeProxy: false
+
+  cleanPrometheusOperatorObjectNames: true
+  prometheusOperator:
+    revisionHistoryLimit: 0
+    admissionWebhooks:
+      patch:
+        ttlSecondsAfterFinished: 5
+
+  prometheus:
+    prometheusSpec:
+      probeSelectorNilUsesHelmValues: false
+      ruleSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
+      replicas: 2
+      retention: 365d
+      resources:
+        requests:
+          cpu: 300m
+          memory: 2400Mi
+
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            resources:
+              requests:
+                storage: 100Gi
+    ingress:
+      enabled: false
+
+  kube-state-metrics:
+    revisionHistoryLimit: 0
+    metricLabelsAllowlist: 
+    - nodes=[topology.kubernetes.io/zone]
+
+  prometheus-node-exporter:
+    revisionHistoryLimit: 0
+    namespaceOverride: 'prometheus-node-exporter'
+
+  kubeScheduler:
+    service:
+      selector:
+        k8s-app: kube-scheduler
+        tier: control-plane
+    spec:
+      endpoints:
+        - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+          port: http-metrics
+          scheme: https
+          tlsConfig:
+            caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+            insecureSkipVerify: true
+
+  kubeControllerManager:
+    service:
+      selector:
+        k8s-app: kube-controller-manager
+        tier: control-plane
+    spec:
+      endpoints:
+        - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+          port: http-metrics
+          scheme: https
+          tlsConfig:
+            caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+            insecureSkipVerify: true
+
+  grafana:
+    enabled: false
+
+  kubeProxy:
+    enabled: false # Cilium replacement

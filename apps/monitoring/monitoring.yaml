@@ -1,0 +1,11 @@
+apps:
+  monitoring:
+    gatus:
+      deploy: false
+      namespace: monitoring
+    kube-prometheus-stack:
+      deploy: true
+      namespace: monitoring
+    ntfy:
+      deploy: false
+      namespace: monitoring

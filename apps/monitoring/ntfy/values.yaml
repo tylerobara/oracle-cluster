@@ -1,0 +1,36 @@
+ntfy:
+  image:
+    tag: "v2.13.0"
+  ntfy:
+    baseURL: "https://ntfy.obara.dev"
+    enableReservations: false
+    enableSignup: true
+    enableLogin: true
+
+  persistence:
+    enabled: true
+
+  prometheus:
+    servicemonitor:
+      enabled: false
+
+  grafana:
+    dashboards:
+      enabled: false
+
+  ingress:
+    enabled: true
+    className: "traefik"
+    annotations:
+      kubernetes.io/ingress.class: traefik
+      gethomepage.dev/href: "https://ntfy.obara.dev"
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: "ntfy"
+      gethomepage.dev/description: "Notifications"
+      gethomepage.dev/group: "Monitoring"
+      gethomepage.dev/icon: "sh-ntfy.svg"
+    hosts:
+      - host: ntfy.obara.dev
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
