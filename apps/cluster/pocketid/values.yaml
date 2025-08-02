@@ -1,0 +1,78 @@
+database:
+  image:
+    registry: ghcr.io
+    repository: cloudnative-pg/postgresql
+    tag: 17
+
+  clusterName: pocketid
+  logLevel: error
+  replicas: 1
+  size: 100Mi
+
+  monitoring:
+    enabled: false
+
+  backups:
+    enabled: false
+    secretName: ''
+    retention: ''
+    path: ''
+    endpoint: ''
+
+  topologySpreadConstraints:
+
+app-template:
+  controllers:
+    pocketid:
+      strategy: Recreate
+      containers:
+        main:
+          image:
+            repository: 11notes/pocket-id
+            tag: 1.6.4
+            pullPolicy: IfNotPresent
+          env:
+            TZ: "America/New_York"
+            APP_URL: "http://id.cloud.obara.xyz"
+            TRUST_PROXY: true
+            DB_PROVIDER: "postgres"
+            DB_CONNECTION_STRING:
+              valueFrom:
+                secretKeyRef:
+                  name: pocketid-app
+                  key: uri
+
+  service:
+    pocketid:
+      controller: pocketid
+      ports:
+        http:
+          port: 1411
+
+  ingress:
+    pocketid:
+      annotations: 
+        kubernetes.io/ingress.class: traefik
+        gethomepage.dev/href: "https://id..cloud.obara.xyz"
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/name: "pocketid"
+        gethomepage.dev/description: "IdP"
+        gethomepage.dev/group: "Misc"
+        gethomepage.dev/icon: "sh-pocketid.png"
+      hosts:
+        - host: id.cloud.obara.xyz
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                identifier: pocketid
+                port: http
+
+  persistence:
+    pocketid:
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 250Mi
+      globalMounts:
+        - path: /pocket-id/var
+
