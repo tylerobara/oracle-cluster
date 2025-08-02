@@ -36,7 +36,7 @@ kube-prometheus-stack:
           spec:
             resources:
               requests:
-                storage: 100Gi
+                storage: 10Gi
     ingress:
       enabled: false
 
