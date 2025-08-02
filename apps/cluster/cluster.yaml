@@ -1,7 +1,7 @@
 apps:
   cluster:
     cloudnative-postgres:
-      deploy: false
+      deploy: true
       namespace: storage
       serverSideApply: true
       ignoreDifferences:
