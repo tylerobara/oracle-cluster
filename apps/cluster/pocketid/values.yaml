@@ -33,7 +33,7 @@ app-template:
             pullPolicy: IfNotPresent
           env:
             TZ: "America/New_York"
-            APP_URL: "http://id.cloud.obara.xyz"
+            APP_URL: "https://id.cloud.obara.xyz"
             TRUST_PROXY: true
             DB_PROVIDER: "postgres"
             DB_CONNECTION_STRING:
