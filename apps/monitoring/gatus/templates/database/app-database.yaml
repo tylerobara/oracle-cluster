@@ -1,0 +1,11 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: {{ .Values.database.clusterName }}-db
+  labels:
+    app.kubernetes.io/component: "db"
+spec:
+  name: {{ .Values.database.clusterName }}_db
+  owner: {{ .Values.database.clusterName }}_user
+  cluster:
+    name: {{ .Values.database.clusterName }}

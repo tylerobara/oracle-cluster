@@ -1,0 +1,51 @@
+gatus:
+  image:
+    repository: "ghcr.io/twin/gatus"
+    tag: "v5.20.0"
+  ingress:
+    enabled: true
+    ingressClassName: "traefik"
+    hosts:
+    - status.cloud.obara.xyz
+
+  secrets: true
+
+  config:
+    endpoints:
+      - name: PodInfo
+        url: "https://podinfo.cloud.obara.xyz"
+        conditions:
+          - "[STATUS] == 200"
+    storage:
+      type: postgres
+      path: "${POSTGRES_FQDN}?sslmode=disable"
+
+  env: 
+    POSTGRES_FQDN:
+      valueFrom:
+        secretKeyRef:
+          name: gatus-app
+          key: fqdn-uri
+
+database:
+  image:
+    registry: ghcr.io
+    repository: cloudnative-pg/postgresql
+    tag: 17
+
+  clusterName: gatus
+  logLevel: error
+  replicas: 1
+  size: 500Mi
+
+  monitoring:
+    enabled: false
+
+  backups:
+    enabled: false
+    secretName: ''
+    retention: ''
+    path: ''
+    endpoint: ''
+
+  topologySpreadConstraints:
