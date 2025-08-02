@@ -47,7 +47,7 @@ kube-prometheus-stack:
 
   prometheus-node-exporter:
     revisionHistoryLimit: 0
-    namespaceOverride: 'prometheus-node-exporter'
+    namespaceOverride: 'monitoring'
 
   kubeScheduler:
     service:
