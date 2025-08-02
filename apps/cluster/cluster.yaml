@@ -13,3 +13,6 @@ apps:
         kind: ValidatingWebhookConfiguration
         jqPathExpressions:
         - .webhooks[].clientConfig.caBundle
+    pocketid:
+      deploy: true
+      namespace: default
