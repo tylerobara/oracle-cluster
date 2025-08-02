@@ -1,0 +1,8 @@
+apiVersion: v2
+name: cloudnative-postgres
+version: 1.0.0
+
+dependencies:
+  - name: cloudnative-pg
+    version: 0.25.0
+    repository: oci://ghcr.io/cloudnative-pg/charts

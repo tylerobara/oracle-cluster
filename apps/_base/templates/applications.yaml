@@ -1,0 +1,48 @@
+{{- range $group, $apps := .Values.apps }}
+{{- range $name, $app := $apps }}
+{{- if $app.deploy }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $name }}
+  namespace: argocd
+  labels:
+    group: {{ $group }}
+  {{- if list nil true | has $app.finalize }}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  {{- end }}
+spec:
+  project: default
+  revisionHistoryLimit: 0
+  source:
+    repoURL: https://gitea.obara.xyz/tylerobara/k8slab.git
+    targetRevision: HEAD
+    path: {{ $app.path | default (printf "apps/%s/%s" $group $name) }}
+    {{- with $app.valueFiles }}
+    helm:
+      valueFiles: {{ . | toYaml | nindent 8 }}
+    {{- end }}
+  destination:
+    name: in-cluster
+    namespace: {{ $app.namespace | default $name }}
+  {{- with $app.ignoreDifferences }}
+  ignoreDifferences: {{ . | toYaml | nindent 6 }}
+  {{- end }}
+  syncPolicy:
+    syncOptions:
+      - FailOnSharedResource=true
+      - CreateNamespace=true
+    {{- if $app.serverSideApply }}
+      - ServerSideApply=true
+    {{- end }}
+    {{- if or (not (hasKey $app "autoSync")) $app.autoSync }}
+    automated:
+      prune: true
+      selfHeal: true
+    {{- else }}
+    {{- end }}
+---
+{{- end }}
+{{- end }}
+{{- end }}
