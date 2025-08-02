@@ -8,7 +8,7 @@ gatus:
     hosts:
     - status.cloud.obara.xyz
 
-  secrets: true
+  secrets: false
 
   config:
     endpoints:
