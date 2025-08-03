@@ -1,3 +1,26 @@
+database:
+  image:
+    registry: ghcr.io
+    repository: cloudnative-pg/postgresql
+    tag: 17
+
+  clusterName: gatus
+  logLevel: error
+  replicas: 1
+  size: 500Mi
+
+  monitoring:
+    enabled: false
+
+  backups:
+    enabled: false
+    secretName: ''
+    retention: ''
+    path: ''
+    endpoint: ''
+
+  topologySpreadConstraints:
+
 gatus:
   image:
     repository: "ghcr.io/twin/gatus"
@@ -10,36 +33,6 @@ gatus:
 
   secrets: false
 
-  config:
-    endpoints:
-      - name: PodInfo
-        url: "http://podinfo.default.svc.cluster.local:9898"
-        conditions:
-          - "[STATUS] == 200"
-      - name: PocketId
-        url: "http://pocketid.default.svc.cluster.local:1411"
-        conditions:
-          - "[STATUS] == 200"
-      - name: Mattermost
-        url: http://mm.obara.dev/api/v4/system/ping
-        group: Services
-        interval: 1m
-        conditions:
-          - "[STATUS] == 200"
-          - "[BODY].status == OK"
-        client:
-          dns-resolver: "tcp://192.168.10.10:53"
-    storage:
-      type: postgres
-      path: "${POSTGRES_FQDN}?sslmode=disable"
-    security:
-      oidc:
-        issuer-url: "https://id.cloud.obara.xyz"
-        redirect-url: "https://status.cloud.obara.xyz/authorization-code/callback"
-        client-id: "${OIDC_ID}"
-        client-secret: "${OIDC_SECRET}"
-        scopes: ["openid"]
-        allowed-subjects: ["${ALLOWED_SUBJECTS}"]
   env:
     GATUS_LOG_LEVEL: DEBUG
     POSTGRES_FQDN:
@@ -63,25 +56,32 @@ gatus:
           name: gatus-secrets
           key: allowed_subjects
 
-database:
-  image:
-    registry: ghcr.io
-    repository: cloudnative-pg/postgresql
-    tag: 17
-
-  clusterName: gatus
-  logLevel: error
-  replicas: 1
-  size: 500Mi
-
-  monitoring:
-    enabled: false
-
-  backups:
-    enabled: false
-    secretName: ''
-    retention: ''
-    path: ''
-    endpoint: ''
-
-  topologySpreadConstraints:
+  config:
+    endpoints:
+      - name: PodInfo
+        url: "http://podinfo.default.svc.cluster.local:9898"
+        conditions:
+          - "[STATUS] == 200"
+      - name: PocketId
+        url: "http://pocketid.default.svc.cluster.local:1411"
+        conditions:
+          - "[STATUS] == 200"
+      - name: Mattermost
+        url: http://mm.obara.dev/api/v4/system/ping
+        interval: 1m
+        conditions:
+          - "[STATUS] == 200"
+          - "[BODY].status == OK"
+        client:
+          dns-resolver: "tcp://192.168.10.10:53"
+    storage:
+      type: postgres
+      path: "${POSTGRES_FQDN}?sslmode=disable"
+    security:
+      oidc:
+        issuer-url: "https://id.cloud.obara.xyz"
+        redirect-url: "https://status.cloud.obara.xyz/authorization-code/callback"
+        client-id: "${OIDC_ID}"
+        client-secret: "${OIDC_SECRET}"
+        scopes: ["openid"]
+        allowed-subjects: ["${ALLOWED_SUBJECTS}"]
