@@ -20,6 +20,15 @@ gatus:
         url: "http://pocketid.default.svc.cluster.local:1411"
         conditions:
           - "[STATUS] == 200"
+      - name: Mattermost
+        url: http://mm.obara.dev/api/v4/system/ping
+        group: Services
+        interval: 1m
+        conditions:
+          - "[STATUS] == 200"
+          - "[BODY].status == OK"
+        client:
+          dns-resolver: "tcp://192.168.10.10:53"
     storage:
       type: postgres
       path: "${POSTGRES_FQDN}?sslmode=disable"
