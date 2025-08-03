@@ -13,7 +13,11 @@ gatus:
   config:
     endpoints:
       - name: PodInfo
-        url: "https://podinfo.cloud.obara.xyz"
+        url: "http://podinfo.default.svc.cluster.local:9898"
+        conditions:
+          - "[STATUS] == 200"
+      - name: PocketId
+        url: "http://pocketid.default.svc.cluster.local:1411"
         conditions:
           - "[STATUS] == 200"
     storage:
