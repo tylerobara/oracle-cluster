@@ -40,7 +40,8 @@ gatus:
         client-secret: "${OIDC_SECRET}"
         scopes: ["openid"]
         allowed-subjects: ["${ALLOWED_SUBJECTS}"]
-  env: 
+  env:
+    GATUS_LOG_LEVEL: DEBUG
     POSTGRES_FQDN:
       valueFrom:
         secretKeyRef:
