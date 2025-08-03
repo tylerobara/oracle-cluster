@@ -32,13 +32,35 @@ gatus:
     storage:
       type: postgres
       path: "${POSTGRES_FQDN}?sslmode=disable"
-
+    security:
+      oidc:
+        issuer-url: "https://id.cloud.obara.xyz"
+        redirect-url: "https://status.cloud.obara.xyz/authorization-code/callback"
+        client-id: "${OIDC_ID}"
+        client-secret: "${OIDC_SECRET}"
+        scopes: ["openid"]
+        allowed-subjects: ["${ALLOWED_SUBJECTS}"]
   env: 
     POSTGRES_FQDN:
       valueFrom:
         secretKeyRef:
           name: gatus-app
           key: fqdn-uri
+    OIDC_ID:
+      valueFrom:
+        secretKeyRef:
+          name: gatus-secrets
+          key: client_id
+    OIDC_SECRET:
+      valueFrom:
+        secretKeyRef:
+          name: gatus-secrets
+          key: client_secret
+    ALLOWED_SUBJECTS:
+      valueFrom:
+        secretKeyRef:
+          name: gatus-secrets
+          key: allowed_subjects
 
 database:
   image:
