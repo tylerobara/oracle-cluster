@@ -143,6 +143,11 @@ forgejo:
           secretKeyRef:
             name: forgejo-app
             key: dbname
+      - name: FORGEJO__DATABASE__HOST
+        valueFrom:
+          secretKeyRef:
+            name: forgejo-app
+            key: host
       - name: FORGEJO__CACHE__HOST
         valueFrom:
           secretKeyRef:
