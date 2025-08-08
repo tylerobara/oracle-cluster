@@ -12,6 +12,7 @@ spec:
     helm:
       valueFiles:
       - ../cluster/cluster.yaml
+      - ../monitoring/monitoring.yaml
   syncPolicy:
     automated:
       enabled: true
