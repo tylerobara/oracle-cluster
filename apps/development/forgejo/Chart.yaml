@@ -2,8 +2,7 @@ apiVersion: v2
 name: forgejo
 version: 1.0.0
 
-# dependencies:
-#   - name: forgejo
-#     version: 13.0.1
-#     repository: oci://code.forgejo.org/forgejo-helm/forgejo
-
+dependencies:
+  - name: forgejo
+    version: 13.0.1
+    repository: oci://code.forgejo.org/forgejo-helm/forgejo
