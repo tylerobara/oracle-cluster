@@ -1,0 +1,6 @@
+apps:
+  development:
+    forgejo:
+      deploy: true
+      namespace: development
+
