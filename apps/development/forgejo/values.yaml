@@ -189,6 +189,7 @@ forgejo:
         SSH_PORT: 22 # rootful image
         SSH_LISTEN_PORT: 2222 # rootless image
         ROOT_URL: https://git.cloud.obara.xyz/
+        ENABLE_INTERNAL_SIGNIN: false
 
       ## @param gitea.config.database Database configuration (only necessary with an [externally managed DB](https://code.forgejo.org/forgejo-helm/forgejo-helm#external-database)).
       database:
