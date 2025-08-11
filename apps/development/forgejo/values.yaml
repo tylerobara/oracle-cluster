@@ -221,6 +221,7 @@ forgejo:
       service:
         DISABLE_REGISTRATION: true
         ENABLE_BASIC_AUTHENTICATION: false
+        ENABLE_INTERNAL_SIGNIN: false
 
       ## @param gitea.config.ssh.minimum_key_sizes SSH minimum key sizes
       ssh.minimum_key_sizes: {}
