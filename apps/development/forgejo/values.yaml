@@ -189,7 +189,7 @@ forgejo:
         SSH_PORT: 22 # rootful image
         SSH_LISTEN_PORT: 2222 # rootless image
         ROOT_URL: https://git.cloud.obara.xyz/
-        ENABLE_INTERNAL_SIGNIN: false
+        ENABLE_PASSWORD_SIGNIN_FORM: false
 
       ## @param gitea.config.database Database configuration (only necessary with an [externally managed DB](https://code.forgejo.org/forgejo-helm/forgejo-helm#external-database)).
       database:
@@ -211,13 +211,15 @@ forgejo:
       camo: {}
 
       ## @param gitea.config.openid Configuration for authentication with OpenID (disabled by default)
-      openid: {}
+      openid:
+        ENABLE_OPENID_SIGNUP: true
 
       ## @param gitea.config.oauth2_client OAuth2 client settings
       oauth2_client: {}
 
       ## @param gitea.config.service Configuration for miscellaneous Forgejo services
-      service: {}
+      service:
+        DISABLE_REGISTRATION: true
 
       ## @param gitea.config.ssh.minimum_key_sizes SSH minimum key sizes
       ssh.minimum_key_sizes: {}
