@@ -220,6 +220,7 @@ forgejo:
       ## @param gitea.config.service Configuration for miscellaneous Forgejo services
       service:
         DISABLE_REGISTRATION: true
+        ENABLE_BASIC_AUTHENTICATION: false
 
       ## @param gitea.config.ssh.minimum_key_sizes SSH minimum key sizes
       ssh.minimum_key_sizes: {}
