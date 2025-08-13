@@ -57,23 +57,6 @@ gatus:
           key: allowed_subjects
 
   config:
-    endpoints:
-      - name: PodInfo
-        url: "http://podinfo.default.svc.cluster.local:9898"
-        conditions:
-          - "[STATUS] == 200"
-      - name: PocketId
-        url: "http://pocketid.default.svc.cluster.local:1411"
-        conditions:
-          - "[STATUS] == 200"
-      - name: Mattermost
-        url: http://mm.obara.dev/api/v4/system/ping
-        interval: 1m
-        conditions:
-          - "[STATUS] == 200"
-          - "[BODY].status == OK"
-        client:
-          dns-resolver: "tcp://192.168.10.10:53"
     storage:
       type: postgres
       path: "${POSTGRES_FQDN}?sslmode=disable"
@@ -85,3 +68,35 @@ gatus:
         client-secret: "${OIDC_SECRET}"
         scopes: ["openid"]
         allowed-subjects: ["${ALLOWED_SUBJECTS}"]
+    endpoints:
+      - name: PodInfo
+        url: "http://podinfo.default.svc.cluster.local:9898"
+        conditions:
+          - "[STATUS] == 200"
+        ui:
+          hide-conditions: true
+          hide-url: true
+          hide-hostname: true
+          hide-port: true
+      - name: PocketId
+        url: "http://pocketid.default.svc.cluster.local:1411"
+        conditions:
+          - "[STATUS] == 200"
+        ui:
+          hide-conditions: true
+          hide-url: true
+          hide-hostname: true
+          hide-port: true
+      - name: Mattermost
+        url: http://mm.obara.dev/api/v4/system/ping
+        interval: 1m
+        conditions:
+          - "[STATUS] == 200"
+          - "[BODY].status == OK"
+        client:
+          dns-resolver: "tcp://192.168.10.10:53"
+        ui:
+          hide-conditions: true
+          hide-url: true
+          hide-hostname: true
+          hide-port: true
