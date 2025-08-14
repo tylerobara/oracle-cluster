@@ -16,3 +16,6 @@ apps:
     pocketid:
       deploy: true
       namespace: default
+    traefik:
+      deploy: true
+      namespace: traefik
