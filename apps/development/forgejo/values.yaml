@@ -25,6 +25,10 @@ cache:
   clusterName: forgejo
 
 forgejo:
+  service:
+    ssh:
+      port: 2222
+
   global:
     storageClass: 'longhorn'
 
