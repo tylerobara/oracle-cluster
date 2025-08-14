@@ -15,7 +15,7 @@ traefik:
   additionalArguments:
     - "--providers.kubernetesingress.ingressendpoint.publishedservice=traefik/traefik"
     - "--serversTransport.insecureSkipVerify=true"
-    - "--log.level=DEBUG"
+    - "--log.level=INFO"
     - "--providers.kubernetescrd.allowexternalnameservices=true"
     - "--providers.kubernetescrd.allowCrossNamespace=true"
   providers:
