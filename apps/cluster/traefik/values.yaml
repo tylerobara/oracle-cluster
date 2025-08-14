@@ -1,0 +1,70 @@
+traefik:
+  ingressRoute:
+    dashboard:
+      enabled: true
+      matchRule: Host(`traefik.cloud.obara.xyz`)
+      entryPoints:
+        - websecure
+      middlewares:
+        - name: traefik-oidc-auth
+
+  global:
+    sendAnonymousUsage: false
+    checkNewVersion: false
+
+  additionalArguments:
+    - "--providers.kubernetesingress.ingressendpoint.publishedservice=traefik/traefik"
+    - "--serversTransport.insecureSkipVerify=true"
+    - "--log.level=DEBUG"
+    - "--providers.kubernetescrd.allowexternalnameservices=true"
+    - "--providers.kubernetescrd.allowCrossNamespace=true"
+  providers:
+    kubernetesCRD:
+      enabled: true
+      ingressClass: traefik
+      allowExternalNameServices: true
+    kubernetesIngress:
+      enabled: true
+      allowExternalNameServices: true
+      publishedService:
+        enabled: false
+
+  ports:
+    web:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+          permanent: true
+    forgejo-ssh:
+      port: "2222"
+      expose:
+        default: true
+
+  tlsStore:
+    default:
+      defaultCertificate:
+        secretName: cloud-obara-xyz-tls
+
+  logs:
+    general:
+      level: "DEBUG"
+    access:
+      enabled: true
+      format: "json"
+      # filters:
+      #   statuscodes: "400-599"
+
+  gateway:
+    enabled: false
+
+  experimental:
+    plugins:
+      traefik-oidc-auth:
+        moduleName: "github.com/sevensolutions/traefik-oidc-auth"
+        version: "v0.14.0"
+
+  service:
+    loadBalancerIP: "10.0.0.68"
+    # externalIPs:
+    #   - 10.0.0.68
