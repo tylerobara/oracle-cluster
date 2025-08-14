@@ -7,7 +7,7 @@ database:
   clusterName: forgejo
   logLevel: error
   replicas: 1
-  size: 5Gi
+  size: 10Gi
 
   monitoring:
     enabled: false
