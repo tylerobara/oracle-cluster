@@ -3,4 +3,6 @@ apps:
     forgejo:
       deploy: true
       namespace: development
-
+    forgejo-runner:
+      deploy: true
+      namespace: development

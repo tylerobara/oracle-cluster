@@ -1,0 +1,14 @@
+forgejo-runner:
+  runner:
+    config:
+      # -- create a secret by run: forgejo-runner register --no-interactive --token {TOKEN} --name runner --instance https://next.forgejo.org
+      create: false
+      existingSecret: "forgejo-runner-secret"
+      existingInitSecret: "forgejo-runner-secret"
+
+  kubectl:
+    image:
+      registry: docker.io
+      repository: rancher/kubectl
+      pullPolicy: IfNotPresent
+      tag: v1.33.3

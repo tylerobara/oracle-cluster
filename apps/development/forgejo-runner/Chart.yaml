@@ -1,0 +1,8 @@
+apiVersion: v2
+name: forgejo-runner
+version: 1.0.0
+
+dependencies:
+  - name: forgejo-runner
+    version: 0.6.4
+    repository: oci://codeberg.org/wrenix/helm-charts
