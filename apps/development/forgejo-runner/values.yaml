@@ -8,9 +8,9 @@ forgejo-runner:
       # existingSecret: "forgejo-runner-secret"
       existingInitSecret: "forgejo-runner-secret"
 
-  kubectl:
-    image:
-      registry: docker.io
-      repository: rancher/kubectl
-      pullPolicy: IfNotPresent
-      tag: v1.33.3
+  # kubectl:
+  #   image:
+  #     registry: docker.io
+  #     repository: rancher/kubectl
+  #     pullPolicy: IfNotPresent
+  #     tag: v1.33.3
