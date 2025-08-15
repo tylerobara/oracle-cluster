@@ -6,7 +6,7 @@ forgejo-runner:
       instance: https://git.cloud.obara.xyz
       name: forgejo-runner-01
       # existingSecret: "forgejo-runner-secret"
-      # existingInitSecret: "forgejo-runner-secret"
+      existingInitSecret: "forgejo-runner-secret"
 
   kubectl:
     image:
