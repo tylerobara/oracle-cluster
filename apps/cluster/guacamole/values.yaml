@@ -101,13 +101,6 @@ app-template:
     guacamole:
       annotations:
         kubernetes.io/ingress.class: traefik
-      #   gethomepage.dev/href: "https://guac.cloud.obara.xyz"
-      #   gethomepage.dev/enabled: "true"
-      #   gethomepage.dev/name: "Guacamole"
-      #   gethomepage.dev/description: "Guacamole is a clientless remote desktop gateway supporting standard protocols like VNC, RDP, and SSH."
-      #   gethomepage.dev/group: "Connectivity"
-      #   gethomepage.dev/icon: "sh-apache-guacamole.svg"
-      #   gethomepage.dev/pod-selector: "app.kubernetes.io/name=guacamole"
         traefik.ingress.kubernetes.io/router.middlewares: traefik-guacamole-redirect@kubernetescrd
       hosts:
         - host: guac.cloud.obara.xyz
