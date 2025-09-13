@@ -1,8 +1,8 @@
 apps:
   development:
     forgejo:
-      deploy: true
+      deploy: false
       namespace: development
     forgejo-runner:
-      deploy: true
+      deploy: false
       namespace: development
