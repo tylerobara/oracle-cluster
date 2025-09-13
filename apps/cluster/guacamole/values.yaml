@@ -99,8 +99,8 @@ app-template:
 
   ingress:
     guacamole:
-      # annotations:
-      #   kubernetes.io/ingress.class: traefik
+      annotations:
+        kubernetes.io/ingress.class: traefik
       #   gethomepage.dev/href: "https://guac.cloud.obara.xyz"
       #   gethomepage.dev/enabled: "true"
       #   gethomepage.dev/name: "Guacamole"
@@ -108,7 +108,7 @@ app-template:
       #   gethomepage.dev/group: "Connectivity"
       #   gethomepage.dev/icon: "sh-apache-guacamole.svg"
       #   gethomepage.dev/pod-selector: "app.kubernetes.io/name=guacamole"
-      #   traefik.ingress.kubernetes.io/router.middlewares: traefik-guacamole-redirect@kubernetescrd
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-guacamole-redirect@kubernetescrd
       hosts:
         - host: guac.cloud.obara.xyz
           paths:
