@@ -19,3 +19,6 @@ apps:
     traefik:
       deploy: true
       namespace: traefik
+    guacamole:
+      deploy: true
+      namespace: guacamole

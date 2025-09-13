@@ -1,0 +1,12 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: guacamole-app
+  labels:
+    app.kubernetes.io/component: "db"
+    {{- include "common.labels" . | nindent 4 }}
+spec:
+  name: guacamole_db
+  owner: guacamole_user
+  cluster:
+    name: {{ .Values.database.clusterName }}

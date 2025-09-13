@@ -1,0 +1,119 @@
+database:
+  image:
+    registry: ghcr.io
+    repository: cloudnative-pg/postgresql
+    tag: 15.13
+
+  clusterName: guacamole
+  logLevel: error
+  replicas: 1
+  size: 500Mi
+  storageClass: "longhorn"
+
+  monitoring:
+    enabled: false
+
+  backups:
+    enabled: false
+    secretName: ''
+    retention: ''
+    path: ''
+    endpoint: ''
+
+  topologySpreadConstraints:
+
+app:
+  image:
+    registry: docker.io
+    repository: guacamole/guacamole
+    tag: 1.6.0
+    pullPolicy: IfNotPresent
+  podSecurityContext: {}
+
+app-template:
+  controllers:
+    guacamole:
+      strategy: Recreate
+      containers:
+        guacamole:
+          image:
+            repository: guacamole/guacamole
+            tag: 1.6.0
+            pullPolicy: IfNotPresent
+          env:
+            OPENID_ENABLED: "true"
+            # EXTENSION_PRIORITY: "*, openid" # Uncomment to allow basic auth to be used as a fallback
+            EXTENSION_PRIORITY: "openid"
+            OPENID_AUTHORIZATION_ENDPOINT: 'https://id.cloud.obara.xyz/authorize'
+            OPENID_JWKS_ENDPOINT: 'https://id.cloud.obara.xyz/.well-known/jwks.json'
+            OPENID_ISSUER: 'https://id.cloud.obara.xyz'
+            OPENID_CLIENT_ID:
+              valueFrom:
+                secretKeyRef:
+                  name: guacamole-secrets
+                  key: OPENID_CLIENT_ID
+            OPENID_REDIRECT_URI: 'https://guac.cloud.obara.xyz/guacamole'
+            LOG_LEVEL: debug
+            GUACD_HOSTNAME: guacamole-guacd
+            POSTGRESQL_DATABASE:
+              valueFrom:
+                secretKeyRef:
+                  name: guacamole-app
+                  key: dbname
+            POSTGRESQL_HOSTNAME:
+              valueFrom:
+                secretKeyRef:
+                  name: guacamole-app
+                  key: host
+            POSTGRESQL_PASSWORD:
+              valueFrom:
+                secretKeyRef:
+                  name: guacamole-app
+                  key: password
+            POSTGRESQL_USERNAME:
+              valueFrom:
+                secretKeyRef:
+                  name: guacamole-app
+                  key: username
+            RECORDING_SEARCH_PATH: /recordings
+
+    guacd:
+      strategy: Recreate
+      containers:
+        kms-gui:
+          image:
+            repository: guacamole/guacd
+            tag: 1.6.0
+
+  service:
+    guacamole:
+      controller: guacamole
+      ports:
+        http:
+          port: 8080
+    guacd:
+      controller: guacd
+      ports:
+        tcp:
+          port: 4822
+
+  ingress:
+    guacamole:
+      # annotations:
+      #   kubernetes.io/ingress.class: traefik
+      #   gethomepage.dev/href: "https://guac.cloud.obara.xyz"
+      #   gethomepage.dev/enabled: "true"
+      #   gethomepage.dev/name: "Guacamole"
+      #   gethomepage.dev/description: "Guacamole is a clientless remote desktop gateway supporting standard protocols like VNC, RDP, and SSH."
+      #   gethomepage.dev/group: "Connectivity"
+      #   gethomepage.dev/icon: "sh-apache-guacamole.svg"
+      #   gethomepage.dev/pod-selector: "app.kubernetes.io/name=guacamole"
+      #   traefik.ingress.kubernetes.io/router.middlewares: traefik-guacamole-redirect@kubernetescrd
+      hosts:
+        - host: guac.cloud.obara.xyz
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                identifier: guacamole
+                port: http
