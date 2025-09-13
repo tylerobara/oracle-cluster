@@ -42,8 +42,8 @@ app-template:
             pullPolicy: IfNotPresent
           env:
             OPENID_ENABLED: "true"
-            # EXTENSION_PRIORITY: "*, openid" # Uncomment to allow basic auth to be used as a fallback
-            EXTENSION_PRIORITY: "openid"
+            EXTENSION_PRIORITY: "*, openid" # Uncomment to allow basic auth to be used as a fallback
+            # EXTENSION_PRIORITY: "openid"
             OPENID_AUTHORIZATION_ENDPOINT: 'https://id.cloud.obara.xyz/authorize'
             OPENID_JWKS_ENDPOINT: 'https://id.cloud.obara.xyz/.well-known/jwks.json'
             OPENID_ISSUER: 'https://id.cloud.obara.xyz'
