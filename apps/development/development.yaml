@@ -6,3 +6,6 @@ apps:
     forgejo-runner:
       deploy: false
       namespace: development
+    postiz:
+      deploy: true
+      namespace: postiz

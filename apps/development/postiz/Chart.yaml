@@ -1,0 +1,8 @@
+apiVersion: v2
+name: postiz
+version: 1.0.0
+
+dependencies:
+  - name: postiz
+    version: 1.0.5
+    repository: oci://ghcr.io/gitroomhq/postiz-helmchart/charts/postiz-app

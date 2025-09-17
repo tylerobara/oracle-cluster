@@ -1,0 +1,15 @@
+postiz:
+  postgresql:
+    primary:
+      persistence:
+        size: 1Gi
+  ingress:
+    enabled: true
+    className: "traefik"
+    annotations: {}
+    hosts:
+      - host: postiz.cloud.obara.xyz
+        paths:
+          - path: /
+            pathType: Prefix
+            port: 80
