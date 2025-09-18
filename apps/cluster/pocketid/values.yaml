@@ -53,7 +53,7 @@ app-template:
     pocketid:
       annotations: 
         kubernetes.io/ingress.class: traefik
-        gethomepage.dev/href: "https://id..cloud.obara.xyz"
+        gethomepage.dev/href: "https://id.cloud.obara.xyz"
         gethomepage.dev/enabled: "true"
         gethomepage.dev/name: "pocketid"
         gethomepage.dev/description: "IdP"

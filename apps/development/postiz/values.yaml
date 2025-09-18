@@ -1,20 +1,66 @@
-postiz-app:
-  postgresql:
-    image:
-      repository: bitnamilegacy/postgresql
-    primary:
-      persistence:
-        size: 1Gi
-  redis:
-    image:
-      repository: bitnamilegacy/redis
+database:
+  image:
+    registry: ghcr.io
+    repository: cloudnative-pg/postgresql
+    tag: 17
+
+  clusterName: postiz
+  logLevel: error
+  replicas: 1
+  size: 1Gi
+
+  monitoring:
+    enabled: false
+
+  backups:
+    enabled: false
+    secretName: ''
+    retention: ''
+    path: ''
+    endpoint: ''
+
+  topologySpreadConstraints:
+
+app-template:
+  controllers:
+    postiz:
+      strategy: Recreate
+      containers:
+        main:
+          image:
+            repository: ghcr.io/gitroomhq/postiz-app
+            tag: v2.6.0
+            pullPolicy: IfNotPresent
+          env:
+            REDIS_URL:
+              valueFrom:
+                secretKeyRef:
+                  name: postiz-cache-secret
+                  key: host
+            DATABASE_URL:
+              valueFrom:
+                secretKeyRef:
+                  name: postiz-app
+                  key: uri
+
+  service:
+    postiz:
+      controller: postiz
+      ports:
+        http:
+          port: 1411
+
   ingress:
-    enabled: true
-    className: "traefik"
-    annotations: {}
-    hosts:
-      - host: postiz.cloud.obara.xyz
-        paths:
-          - path: /
-            pathType: Prefix
-            port: 80
+    postiz:
+      annotations: {}
+      hosts:
+        - host: postiz.cloud.obara.xyz
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                identifier: postiz
+                port: http
+
+cache:
+  clusterName: postiz
