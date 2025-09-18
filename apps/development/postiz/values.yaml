@@ -1,4 +1,4 @@
-postiz:
+postiz-app:
   postgresql:
     primary:
       persistence:

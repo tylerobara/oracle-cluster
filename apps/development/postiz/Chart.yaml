@@ -3,6 +3,6 @@ name: postiz
 version: 1.0.0
 
 dependencies:
-  - name: postiz
+  - name: postiz-app
     version: 1.0.5
-    repository: oci://ghcr.io/gitroomhq/postiz-helmchart/charts/postiz-app
+    repository: oci://ghcr.io/gitroomhq/postiz-helmchart/charts
