@@ -20,5 +20,5 @@ apps:
       deploy: true
       namespace: traefik
     guacamole:
-      deploy: true
+      deploy: false
       namespace: guacamole
