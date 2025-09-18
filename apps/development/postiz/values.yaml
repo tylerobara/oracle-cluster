@@ -38,6 +38,7 @@ app-template:
             BACKEND_INTERNAL_URL: "http://localhost:3000"
             STORAGE_PROVIDER: "local"
             UPLOAD_DIRECTORY: "/uploads"
+            DISABLE_REGISTRATION: "true"
             REDIS_URL:
               valueFrom:
                 secretKeyRef:
