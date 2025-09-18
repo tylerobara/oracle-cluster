@@ -5,6 +5,9 @@ postiz-app:
     primary:
       persistence:
         size: 1Gi
+  redis:
+    image:
+      repository: bitnamilegacy/redis
   ingress:
     enabled: true
     className: "traefik"
