@@ -32,6 +32,12 @@ app-template:
             tag: v2.6.0
             pullPolicy: IfNotPresent
           env:
+            MAIN_URL: "https://postiz.cloud.obara.xyz"
+            FRONTEND_URL: "https://postiz.cloud.obara.xyz"
+            NEXT_PUBLIC_BACKEND_URL: "https://postiz.cloud.obara.xyz/api"
+            BACKEND_INTERNAL_URL: "http://localhost:3000"
+            STORAGE_PROVIDER: "local"
+            UPLOAD_DIRECTORY: "/uploads"
             REDIS_URL:
               valueFrom:
                 secretKeyRef:
@@ -42,6 +48,11 @@ app-template:
                 secretKeyRef:
                   name: postiz-app
                   key: uri
+            JWT_SECRET:
+              valueFrom:
+                secretKeyRef:
+                  name: postiz-jwt-secret
+                  key: jwt-secret
 
   service:
     postiz:
@@ -62,5 +73,17 @@ app-template:
                 identifier: postiz
                 port: http
 
+  persistence:
+    postiz:
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      globalMounts:
+        - path: /uploads
+
 cache:
   clusterName: postiz
+
+
+#JWT_SECRET not set.                                                                                                 │
+#STORAGE_PROVIDER not set. Needed to setup storage.
