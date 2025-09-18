@@ -48,7 +48,7 @@ app-template:
       controller: postiz
       ports:
         http:
-          port: 1411
+          port: 80
 
   ingress:
     postiz:
