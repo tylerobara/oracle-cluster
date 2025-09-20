@@ -9,7 +9,7 @@ app-template:
             tag: 6
             pullPolicy: IfNotPresent
           env:
-            WORDPRESS_DB_HOST: wordpressdb
+            WORDPRESS_DB_HOST: wordpress-db
             WORDPRESS_DB_USER: root
             WORDPRESS_DB_PASSWORD:
               valueFrom:
