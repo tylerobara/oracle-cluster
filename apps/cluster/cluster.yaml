@@ -22,3 +22,6 @@ apps:
     guacamole:
       deploy: false
       namespace: guacamole
+    mariadb:
+      deploy: true
+      namespace: storage
