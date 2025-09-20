@@ -9,3 +9,6 @@ apps:
     postiz:
       deploy: true
       namespace: postiz
+    wordpress:
+      deploy: true
+      namespace: wordpress
