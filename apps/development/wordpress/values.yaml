@@ -17,6 +17,7 @@ app-template:
                   name: wordpress-db-root
                   key: password
             WORDPRESS_DB_NAME: wordpress
+            WORDPRESS_DEBUG: 1
 
   service:
     wordpress:
