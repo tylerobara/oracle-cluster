@@ -1,23 +1,46 @@
-database:
-  image:
-    registry: ghcr.io
-    repository: cloudnative-pg/postgresql
-    tag: 17
+app-template:
+  controllers:
+    wordpress:
+      strategy: Recreate
+      containers:
+        main:
+          image:
+            repository: wordpress
+            tag: 6-fpm
+            pullPolicy: IfNotPresent
+          env:
+            WORDPRESS_DB_HOST: wordpressdb
+            WORDPRESS_DB_USER: root
+            WORDPRESS_DB_PASSWORD:
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress-db-root
+                  key: password
+            WORDPRESS_DB_NAME: wordpress
 
-  clusterName: wordpress
-  logLevel: error
-  replicas: 1
-  size: 4Gi
+  service:
+    wordpress:
+      controller: wordpress
+      ports:
+        http:
+          port: 80
 
-  monitoring:
-    enabled: false
+  ingress:
+    wordpress:
+      annotations: {}
+      hosts:
+        - host: mysite.cloud.obara.xyz
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                identifier: wordpress
+                port: http
 
-  backups:
-    enabled: false
-    secretName: ''
-    retention: ''
-    path: ''
-    endpoint: ''
-
-  topologySpreadConstraints:
-
+  persistence:
+    wordpress:
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 4Gi
+      globalMounts:
+        - path: /var/www/html
