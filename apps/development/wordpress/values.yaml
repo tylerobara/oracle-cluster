@@ -6,7 +6,7 @@ app-template:
         main:
           image:
             repository: wordpress
-            tag: 6-fpm
+            tag: 6
             pullPolicy: IfNotPresent
           env:
             WORDPRESS_DB_HOST: wordpressdb
