@@ -10,5 +10,5 @@ apps:
       deploy: true
       namespace: postiz
     wordpress:
-      deploy: true
+      deploy: false
       namespace: wordpress
