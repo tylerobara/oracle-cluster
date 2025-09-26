@@ -7,7 +7,7 @@ apps:
       deploy: false
       namespace: development
     postiz:
-      deploy: true
+      deploy: false
       namespace: postiz
     wordpress:
       deploy: false
