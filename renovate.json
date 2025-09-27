@@ -1,0 +1,19 @@
+{
+    "argocd": {
+      "fileMatch": ["apps/.+\\.yaml$"]
+    },
+  "packageRules": [
+    {
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch"
+      ],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch"
+    }
+  ]
+}
