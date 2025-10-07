@@ -84,7 +84,7 @@ app-template:
     velld-api-backups:
       type: persistentVolumeClaim
       accessMode: ReadWriteOnce
-      size: 10Gi
+      size: 3Gi
       advancedMounts:
         velld-api:
           main:
