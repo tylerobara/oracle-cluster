@@ -1,0 +1,91 @@
+app-template:
+  controllers:
+    velld-api:
+      strategy: Recreate
+      containers:
+        main:
+          image:
+            repository: ghcr.io/dendianugerah/velld/api
+            tag: latest
+            pullPolicy: IfNotPresent
+          env:
+            ALLOW_REGISTER: false
+            ADMIN_USERNAME_CREDENTIAL:
+              valueFrom:
+                secretKeyRef:
+                  name: velld-admin-secret
+                  key: ADMIN_USERNAME_CREDENTIAL
+            ADMIN_PASSWORD_CREDENTIAL:
+              valueFrom:
+                secretKeyRef:
+                  name: velld-admin-secret
+                  key: ADMIN_PASSWORD_CREDENTIAL
+            NEXT_PUBLIC_API_URL: "https://velld-api.cloud.obara.xyz"
+    velld-web:
+      strategy: Recreate
+      containers:
+        main:
+          image:
+            repository: ghcr.io/dendianugerah/velld/web
+            tag: latest
+            pullPolicy: IfNotPresent
+          env:
+            NEXT_PUBLIC_API_URL: "https://velld-api.cloud.obara.xyz"
+            ALLOW_REGISTER: false
+  service:
+    velld-web:
+      controller: velld-web
+      ports:
+        http:
+          port: 3000
+    velld-api:
+      controller: velld-api
+      ports:
+        http:
+          port: 8080
+
+  ingress:
+  #   velld-web:
+  #     annotations: 
+  #       kubernetes.io/ingress.class: traefik
+  #       gethomepage.dev/href: "https://velld.cloud.obara.xyz"
+  #       gethomepage.dev/enabled: "true"
+  #       gethomepage.dev/name: "velld"
+  #       gethomepage.dev/description: "Database Backup"
+  #       gethomepage.dev/group: "Misc"
+  #       gethomepage.dev/icon: "sh-velld.png"
+  #     hosts:
+  #       - host: velld.cloud.obara.xyz
+  #         paths:
+  #           - path: /
+  #             pathType: Prefix
+  #             service:
+  #               identifier: velld-web
+  #               port: http
+    velld-api:
+      hosts:
+        - host: velld-api.cloud.obara.xyz
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                identifier: velld-api
+                port: http
+
+  persistence:
+    velld-api-data:
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 2Gi
+      advancedMounts:
+        velld-api:
+          main:
+            - path: /app/internal/database
+    velld-api-backups:
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 10Gi
+      advancedMounts:
+        velld-api:
+          main:
+            - path: /app/backups

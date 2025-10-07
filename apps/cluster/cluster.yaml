@@ -25,3 +25,6 @@ apps:
     mariadb:
       deploy: true
       namespace: storage
+    velld:
+      deploy: true
+      namespace: default
