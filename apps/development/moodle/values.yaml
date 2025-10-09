@@ -17,6 +17,7 @@ moodle:
       gethomepage.dev/description: "Moodle is a learning platform designed to provide educators, administrators and learners with a single robust, secure and integrated system to create personalized learning environments."
       gethomepage.dev/group: "Tools"
       gethomepage.dev/icon: "sh-moodle.svg"
+  extraEnvVarsSecret: moodle-secrets
   mariadb:
     auth:
       rootPassword: moodle
