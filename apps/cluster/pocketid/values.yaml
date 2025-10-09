@@ -58,7 +58,7 @@ app-template:
         gethomepage.dev/name: "pocketid"
         gethomepage.dev/description: "IdP"
         gethomepage.dev/group: "Misc"
-        gethomepage.dev/icon: "sh-pocketid.png"
+        gethomepage.dev/icon: "sh-pocket-id.png"
       hosts:
         - host: id.cloud.obara.xyz
           paths:
