@@ -1,0 +1,55 @@
+homepage:
+  image:
+    repository: ghcr.io/gethomepage/homepage
+    tag: v1.5.0
+
+  env:
+    HOMEPAGE_ALLOWED_HOSTS: "homepage.cloud.obara.xyz"
+
+  config:
+    title: HomepageDev
+    headerStyle: clean
+    bookmarks:
+      - Developer:
+          - Github:
+            - abbr: GH
+              href: https://github.com/tylerobara
+          - ArtifactHub:
+            - abbr: AH
+              href: https://artifacthub.io/
+    services:
+
+    widgets:
+    kubernetes:
+      mode: default
+      traefik: true
+      # ingress: true
+    settings:
+      layout:
+        Misc:
+          style: row
+          columns: 5
+        Tools:
+          style: row
+          columns: 5
+        Monitoring:
+          style: row
+          columns: 5
+
+  serviceAccount:
+    create: true
+    name: homepage
+
+  enableRbac: true
+
+  ingress:
+    main:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-oidc-auth@kubernetescrd
+      ingressClassName: traefik
+      hosts:
+        - host: homepage.cloud.obara.xyz
+          paths:
+            - path: /
+              pathType: Prefix

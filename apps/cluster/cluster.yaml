@@ -28,3 +28,6 @@ apps:
     velld:
       deploy: true
       namespace: default
+    homepage:
+      deploy: true
+      namespace: default
