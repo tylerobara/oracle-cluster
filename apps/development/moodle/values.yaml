@@ -1,0 +1,16 @@
+moodle:
+  global:
+    security:
+      allowInsecureImages: true
+  image:
+    registry: docker.io
+    repository: bitnamilegacy/moodle
+  allowEmptyPassword: false
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    hostname: moodle.cloud.obara.xyz
+  mariadb:
+    auth:
+      rootPassword: moodle
+      password: moodle

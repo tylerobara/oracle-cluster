@@ -12,3 +12,6 @@ apps:
     wordpress:
       deploy: false
       namespace: wordpress
+    moodle:
+      deploy: true
+      namespace: development

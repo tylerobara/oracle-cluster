@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: velld-db-migrations
+    namespace: default
+data:
+  20241224183549_create_users.sql: |
+    -- +goose Up
+    -- +goose StatementBegin
+    CREATE TABLE IF NOT EXISTS users (
+        id TEXT PRIMARY KEY,
+        username TEXT NOT NULL,
+        password TEXT NOT NULL,
+        created_at TEXT
+    );
+    -- +goose StatementEnd
+
+    -- +goose Down
+    -- +goose StatementBegin
+    DROP TABLE users;
+    -- +goose StatementEnd
+
+  20241225011350_create_connection.sql: |
+    -- +goose Up
+    -- +goose StatementBegin
+    SELECT 'up SQL query';
+    CREATE TABLE connections (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        type TEXT NOT NULL,
+        host TEXT NOT NULL,
+        port INTEGER NOT NULL,
+        username TEXT NOT NULL,
+        password TEXT NOT NULL,
+        database_name TEXT NOT NULL,
+        ssl INTEGER DEFAULT 0,
+        database_size INTEGER,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        last_connected_at TEXT,
+        user_id TEXT REFERENCES users(id),
+        status TEXT DEFAULT 'connected'
+    );
+
+    CREATE INDEX idx_connections_user_id ON connections(user_id);
+    -- +goose StatementEnd
+
+    -- +goose Down
+    -- +goose StatementBegin
+
+    DROP TABLE connections;
+    SELECT 'down SQL query';
+    -- +goose StatementEnd
