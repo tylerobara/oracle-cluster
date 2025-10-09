@@ -46,7 +46,7 @@ homepage:
     main:
       enabled: true
       annotations:
-        traefik.ingress.kubernetes.io/router.middlewares: traefik-oidc-auth@kubernetescrd
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-traefik-oidc-auth@kubernetescrd
       ingressClassName: traefik
       hosts:
         - host: homepage.cloud.obara.xyz
