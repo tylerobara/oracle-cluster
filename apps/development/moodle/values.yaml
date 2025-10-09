@@ -3,7 +3,6 @@ moodle:
     security:
       allowInsecureImages: true
   image:
-    registry: docker.io
     repository: bitnamilegacy/moodle
   allowEmptyPassword: false
   ingress:
@@ -14,3 +13,8 @@ moodle:
     auth:
       rootPassword: moodle
       password: moodle
+    image:
+      repository: bitnamilegacy/mariadb
+    global:
+      security:
+        allowInsecureImages: true
