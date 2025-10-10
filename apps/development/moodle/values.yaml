@@ -6,6 +6,8 @@ moodle:
     repository: bitnamilegacy/moodle
   allowEmptyPassword: false
   existingSecret: moodle-secrets
+  service:
+    type: ClusterIP
   ingress:
     enabled: true
     ingressClassName: traefik
