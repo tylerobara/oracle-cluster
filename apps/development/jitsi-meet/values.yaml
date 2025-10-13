@@ -17,3 +17,5 @@ jitsi-meet:
   jvb:
     publicIPs:
       - 129.213.102.26
+    service:
+      externalTrafficPolicy: Local
