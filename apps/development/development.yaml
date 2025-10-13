@@ -15,3 +15,6 @@ apps:
     moodle:
       deploy: true
       namespace: development
+    jitsi-meet:
+      deploy: true
+      namespace: development

@@ -1,0 +1,19 @@
+jitsi-meet:
+
+
+
+  publicURL: "meet.cloud.obara.xyz"
+  tz: "America/New_York"
+
+  web:
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: traefik
+      hosts:
+        - host: meet.cloud.obara.xyz
+          paths: ['/']
+
+  jvb:
+    publicIPs:
+      - 129.213.102.26
