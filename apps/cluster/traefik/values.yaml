@@ -41,8 +41,9 @@ traefik:
       expose:
         default: true
     jitsi-videobridge:
-      port: "10000"
-      address: ":10000/udp"
+      port: 10000
+      exposedPort: 10000
+      protocol: UDP
       expose:
         default: true
 
