@@ -26,7 +26,7 @@ apps:
       deploy: true
       namespace: storage
     velld:
-      deploy: true
+      deploy: false
       namespace: default
     homepage:
       deploy: true

@@ -13,7 +13,7 @@ apps:
       deploy: false
       namespace: wordpress
     moodle:
-      deploy: true
+      deploy: false
       namespace: development
     jitsi-meet:
       deploy: true
