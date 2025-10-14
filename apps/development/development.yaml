@@ -16,5 +16,5 @@ apps:
       deploy: false
       namespace: development
     jitsi-meet:
-      deploy: true
+      deploy: false
       namespace: development
