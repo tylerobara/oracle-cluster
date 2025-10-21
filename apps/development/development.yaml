@@ -18,3 +18,6 @@ apps:
     jitsi-meet:
       deploy: false
       namespace: development
+    bytestash:
+      deploy: true
+      namespace: development
