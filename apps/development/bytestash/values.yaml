@@ -27,7 +27,7 @@ app-template:
             # Should we use accounts at all? When enabled, it will be like starting a fresh account so export your snippets, no login required
             DISABLE_ACCOUNTS: false
             # Should internal accounts be disabled?
-            DISABLE_INTERNAL_ACCOUNTS: false
+            DISABLE_INTERNAL_ACCOUNTS: true
             # Allow password changes (false by default)
             ALLOW_PASSWORD_CHANGES: true
             # Optional: Enable OIDC for Single Sign On
