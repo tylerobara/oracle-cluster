@@ -66,7 +66,7 @@ app-template:
     bytestash:
       annotations: 
         kubernetes.io/ingress.class: traefik
-        gethomepage.dev/href: "https://stash.obara.dev"
+        gethomepage.dev/href: "https://stash.cloud.obara.xyz"
         gethomepage.dev/enabled: "true"
         gethomepage.dev/name: "bytestash"
         gethomepage.dev/description: "Code Sharing"
@@ -74,7 +74,7 @@ app-template:
         gethomepage.dev/icon: "sh-bytestash.svg"
       className: "traefik"
       hosts:
-        - host: stash.obara.dev
+        - host: stash.cloud.obara.xyz
           paths:
             - path: /
               pathType: Prefix
