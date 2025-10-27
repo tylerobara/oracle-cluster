@@ -99,5 +99,5 @@ externalSecrets:
   data:
   - secretKey: string
     remoteRef:
-      key: bytestash
+      key: development/bytestash
       property: string
