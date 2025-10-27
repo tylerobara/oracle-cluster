@@ -1,0 +1,13 @@
+clusterSecretStore:
+  name: oracle-cluster-secret-store
+  namespace: external-secrets
+  provider:
+    vault:
+      server: "https://bao.obara.dev"
+      path: "oracle"
+      version: "v2"
+      auth:
+        tokenSecretRef:
+          name: "bao-token"
+          namespace: "external-secrets"
+          key: "token"

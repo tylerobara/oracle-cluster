@@ -31,3 +31,6 @@ apps:
     homepage:
       deploy: true
       namespace: default
+    external-secrets:
+      deploy: true
+      namespace: external-secrets
