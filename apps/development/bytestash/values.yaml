@@ -89,3 +89,15 @@ app-template:
       size: 1Gi
       globalMounts:
         - path: /data/snippets
+
+externalSecrets:
+  secretStoreRef:
+    name: bao-backend
+    kind: ClusterSecretStore
+  target:
+    name: bytestash-secrets
+  data:
+  - secretKey: string
+    remoteRef:
+      key: bytestash
+      property: string
