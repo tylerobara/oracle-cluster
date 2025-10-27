@@ -34,3 +34,4 @@ apps:
     external-secrets:
       deploy: true
       namespace: external-secrets
+      serverSideApply: true
