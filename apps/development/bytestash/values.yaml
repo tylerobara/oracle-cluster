@@ -101,3 +101,19 @@ externalSecrets:
     remoteRef:
       key: development/bytestash
       property: string
+  - secretKey: client_id
+    remoteRef:
+      key: development/bytestash
+      property: client_id
+  - secretKey: client_secret
+    remoteRef:
+      key: development/bytestash
+      property: client_secret
+  - secretKey: issuer_url
+    remoteRef:
+      key: development/bytestash
+      property: issuer_url
+  - secretKey: jwt_secret
+    remoteRef:
+      key: development/bytestash
+      property: jwt_secret
