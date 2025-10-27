@@ -92,7 +92,7 @@ app-template:
 
 externalSecrets:
   secretStoreRef:
-    name: bao-backend
+    name: oracle-cluster-secret-store
     kind: ClusterSecretStore
   target:
     name: bytestash-secrets
