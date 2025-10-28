@@ -1,5 +1,9 @@
 apps:
   cluster:
+    argocd:
+      deploy: true
+      namespace: argocd
+      serverSideApply: true
     cloudnative-postgres:
       deploy: true
       namespace: storage

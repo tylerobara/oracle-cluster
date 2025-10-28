@@ -1,0 +1,49 @@
+argocd:
+  server:
+    ingress:
+      enabled: true
+      ingressClassName: traefik
+      hostname: argo.cloud.obara.xyz
+      annotations:
+        kubernetes.io/ingress.class: traefik
+  configs:
+    cm:
+      url: https://argo.cloud.obara.xyz
+      dex.config: |
+          connectors:
+          - name: PocketID
+            type: oidc
+            id: pocketid
+            config:
+              issuer: https://id.cloud.obara.xyz
+              clientID: $argocd-secrets:client_id
+              clientSecret: $argocd-secrets:client_secret
+              insecureEnableGroups: true
+              scopes:
+                - openid
+                - profile
+                - email
+                - groups
+    rbac:
+      policy.csv: |
+        g, argocd_admins, role:admin
+        g, argocd_viewers, role:readonly
+        p, role:global-log-viewer, logs, get, */*, allow
+      policy.default: |
+        policy.default: role:global-log-viewer
+
+externalSecrets:
+  secretStoreRef:
+    name: oracle-cluster-secret-store
+    kind: ClusterSecretStore
+  target:
+    name: argocd-secrets
+  data:
+  - secretKey: client_id
+    remoteRef:
+      key: argocd/argocd
+      property: client_id
+  - secretKey: client_secret
+    remoteRef:
+      key: argocd/argocd
+      property: client_secret
