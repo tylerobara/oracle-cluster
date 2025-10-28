@@ -7,8 +7,10 @@ apps:
       ignoreDifferences:
         - group: apiextensions.k8s.io
           kind: CustomResourceDefinition
-          jsonPointers:
-          - /spec/conversion/strategy
+          jqPathExpressions:
+            - .spec.data[].remoteRef.conversionStrategy
+            - .spec.data[].remoteRef.decodingStrategy
+            - .spec.data[].remoteRef.metadataPolicy
     cloudnative-postgres:
       deploy: true
       namespace: storage
