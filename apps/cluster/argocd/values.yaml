@@ -8,6 +8,7 @@ argocd:
         kubernetes.io/ingress.class: traefik
   configs:
     cm:
+      admin.enabled: "false"
       url: https://argo.cloud.obara.xyz
       dex.config: |
           connectors:
