@@ -1,0 +1,5 @@
+apps:
+  home:
+    scribblers:
+      deploy: true
+      namespace: default

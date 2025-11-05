@@ -15,6 +15,7 @@ spec:
       - ../monitoring/monitoring.yaml
       - ../development/development.yaml
       - ../storage/storage.yaml
+      - ../home/home.yaml
   syncPolicy:
     automated:
       enabled: true
