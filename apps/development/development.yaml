@@ -21,3 +21,6 @@ apps:
     bytestash:
       deploy: true
       namespace: development
+    postgres-test:
+      deploy: true
+      namespace: development
