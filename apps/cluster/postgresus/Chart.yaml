@@ -1,0 +1,12 @@
+apiVersion: v2
+name: postgresus
+version: 1.0.0
+
+sources:
+  - https://github.com/jordan-dalby/ByteStash
+
+dependencies:
+  - name: app-template
+    repository: https://bjw-s-labs.github.io/helm-charts
+    version: 4.4.0
+    alias: postgresus

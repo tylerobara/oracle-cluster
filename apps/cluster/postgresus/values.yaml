@@ -1,0 +1,46 @@
+app-template:
+  controllers:
+    postgresus:
+      strategy: Recreate
+      containers:
+        main:
+          image:
+            repository: rostislavdugin/postgresus
+            tag: latest
+            pullPolicy: IfNotPresent
+
+  service:
+    postgresus:
+      controller: postgresus
+      ports:
+        http:
+          port: 4005
+
+  ingress:
+    postgresus:
+      annotations: 
+        kubernetes.io/ingress.class: traefik
+        gethomepage.dev/href: "https://postgresus.cloud.obara.xyz"
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/name: "postgresus"
+        gethomepage.dev/description: "Code Sharing"
+        gethomepage.dev/group: "Development"
+        gethomepage.dev/icon: "sh-postgresus.svg"
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-traefik-oidc-auth@kubernetescrd
+      className: "traefik"
+      hosts:
+        - host: postgresus.cloud.obara.xyz
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                identifier: postgresus
+                port: http
+
+  persistence:
+    data:
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 100Mi
+      globalMounts:
+        - path: /postgresus-data

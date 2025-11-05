@@ -49,3 +49,6 @@ apps:
     openbao:
       deploy: true
       namespace: openbao
+    postgresus:
+      deploy: true
+      namespace: default
