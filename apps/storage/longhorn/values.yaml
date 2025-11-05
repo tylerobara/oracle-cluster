@@ -1,0 +1,19 @@
+longhorn:
+  preUpgradeChecker:
+    jobEnabled: false
+  ingress:
+    enabled: false
+    ingressClassName: traefik
+    host: longhorn.cloud.obara.xyz
+    annotations:
+      gethomepage.dev/href: "https://longhorn.cloud.obara.xyz"
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: "Longhorn"
+      gethomepage.dev/description: "Longhorn is a cloud-native distributed block storage built on Kubernetes."
+      gethomepage.dev/group: "Storage"
+      gethomepage.dev/icon: "longhorn.svg"
+      gethomepage.dev/pod-selector: "app.kubernetes.io/name=longhorn"
+      traefik.ingress.kubernetes.io/router.middlewares: traefik-traefik-oidc-auth@kubernetescrd
+  metrics:
+    serviceMonitor:
+      enabled: false

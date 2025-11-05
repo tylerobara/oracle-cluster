@@ -58,8 +58,6 @@ traefik:
     access:
       enabled: true
       format: "json"
-      # filters:
-      #   statuscodes: "400-599"
 
   gateway:
     enabled: false
@@ -72,5 +70,3 @@ traefik:
 
   service:
     loadBalancerIP: "10.0.0.68"
-    # externalIPs:
-    #   - 10.0.0.68

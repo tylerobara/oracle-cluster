@@ -1,0 +1,5 @@
+apps:
+  storage:
+    longhorn:
+      deploy: false
+      namespace: longhorn-system

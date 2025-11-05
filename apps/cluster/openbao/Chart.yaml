@@ -1,0 +1,11 @@
+apiVersion: v2
+name: openbao
+version: 1.0.0
+
+sources:
+  - https://github.com/openbao/openbao
+
+dependencies:
+  - name: openbao
+    version: 0.19.1
+    repository: https://openbao.github.io/openbao-helm

@@ -1,0 +1,24 @@
+openbao:
+  server:
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: traefik
+        gethomepage.dev/href: "https://bao.cloud.obara.xyz"
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/name: "OpenBao"
+        gethomepage.dev/description: "Self-hosted, open-source alternative Vault"
+        gethomepage.dev/group: "Services"
+        gethomepage.dev/icon: "sh-openbao.svg"
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-traefik-oidc-auth@kubernetescrd
+      ingressClassName: "traefik"
+      pathType: Prefix
+      activeService: true
+      hosts:
+        - host: bao.cloud.obara.xyz
+
+    ha:
+      enabled: false
+      replicas: 3
+    raft:
+      enabled: true
