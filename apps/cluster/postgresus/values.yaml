@@ -1,4 +1,4 @@
-app-template:
+postgresus:
   controllers:
     postgresus:
       strategy: Recreate
