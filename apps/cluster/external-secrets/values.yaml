@@ -3,7 +3,7 @@ clusterSecretStore:
   namespace: external-secrets
   provider:
     vault:
-      server: "https://bao.obara.dev"
+      server: "http://openbao.openbao.svc.cluster.local:8200"
       path: "oracle"
       version: "v2"
       auth:
