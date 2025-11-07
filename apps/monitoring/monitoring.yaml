@@ -4,7 +4,7 @@ apps:
       deploy: false
       namespace: monitoring
     kube-prometheus-stack:
-      deploy: true
+      deploy: false
       namespace: monitoring
     ntfy:
       deploy: false
