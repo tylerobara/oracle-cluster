@@ -1,4 +1,4 @@
-app-template:
+bytestash:
   controllers:
     bytestash:
       strategy: Recreate
