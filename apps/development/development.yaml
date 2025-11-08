@@ -19,7 +19,7 @@ apps:
       deploy: false
       namespace: development
     bytestash:
-      deploy: true
+      deploy: false
       namespace: development
     postgres-test:
       deploy: false
