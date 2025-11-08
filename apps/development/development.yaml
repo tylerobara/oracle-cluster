@@ -22,5 +22,5 @@ apps:
       deploy: true
       namespace: development
     postgres-test:
-      deploy: true
+      deploy: false
       namespace: development
