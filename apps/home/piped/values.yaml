@@ -95,7 +95,7 @@ piped:
   ingress:
     main:
       enabled: true
-      ingressClassName: tailscale
+      ingressClassName: traefik
       primary: true
       hosts:
         - host: piped.cloud.obara.xyz
@@ -104,7 +104,7 @@ piped:
 
     backend:
       enabled: true
-      ingressClassName: tailscale
+      ingressClassName: traefik
       primary: false
       hosts:
         - host: pipedapi.cloud.obara.xyz
@@ -113,7 +113,7 @@ piped:
 
     ytproxy:
       enabled: true
-      ingressClassName: tailscale
+      ingressClassName: traefik
       primary: false
       hosts:
         - host: ytproxy.cloud.obara.xyz
