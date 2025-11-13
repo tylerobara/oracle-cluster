@@ -6,3 +6,4 @@ apps:
     piped:
       deploy: true
       namespace: default
+      serverSideApply: true
