@@ -1,0 +1,12 @@
+apiVersion: v2
+name: piped
+version: 1.0.0
+
+sources:
+  - https://github.com/TeamPiped/Piped
+  - https://github.com/TeamPiped/Piped-Kubernetes/tree/main/charts/apps/piped
+
+dependencies:
+  - name: piped
+    repository: https://helm.piped.video
+    version: 8.0.21
