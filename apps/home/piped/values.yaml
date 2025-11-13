@@ -1,0 +1,121 @@
+database:
+  image:
+    registry: ghcr.io
+    repository: cloudnative-pg/postgresql
+    tag: 17
+
+  clusterName: piped
+  logLevel: error
+  replicas: 1
+  storageClass: "local-path"
+  size: 5Gi
+
+  monitoring:
+    enabled: false
+
+  backups:
+    enabled: false
+    secretName: ''
+    retention: ''
+    path: ''
+    endpoint: ''
+
+  topologySpreadConstraints:
+
+piped:
+  controller:
+    enabled: false
+
+  serviceAccount:
+    create: false
+
+  frontend:
+    env:
+      BACKEND_HOSTNAME: pipedapi.cloud.obara.xyz
+
+  backend:
+    enabled: true
+    service:
+      main:
+        enabled: true
+        primary: true
+        type: ClusterIP
+        ports:
+          http:
+            enabled: true
+            primary: true
+            port: 8080
+            protocol: HTTP
+
+    config:
+      PORT: 8080
+      HTTP_WORKERS: 2
+      PROXY_PART: https://ytproxy.cloud.obara.xyz
+      # Outgoing HTTP Proxy - eg: 127.0.0.1:8118
+      # HTTP_PROXY: 127.0.0.1:8118
+      # Captcha Parameters
+      # CAPTCHA_BASE_URL: https://api.capmonster.cloud/
+      # CAPTCHA_API_KEY: INSERT_HERE
+      API_URL: https://pipedapi.cloud.obara.xyz
+      # BG_HELPER_URL: http://BG_HELPER_HOSTNAME
+      FRONTEND_URL: https://piped.cloud.obara.xyz
+      # Enable haveibeenpwned compromised password API
+      # COMPROMISED_PASSWORD_CHECK: true
+      # Disable Registration
+      # DISABLE_REGISTRATION: false
+      # Feed Retention Time in Days
+      # FEED_RETENTION: 30
+      database:
+        connection_url: jdbc:postgresql://piped-rw.default.svc.cluster.local:5432/piped
+        driver_class: org.postgresql.Driver
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        # password: IDzTl9Ht5nnRYnsjAfbsyloTXKzq98ZLVfqjZp6lHns5X6YT85U1oGjRJcfJLqiw
+        # username: app
+        secret:
+          name: piped-app
+          username: username
+          password: password
+
+
+    image:
+      # -- image repository
+      repository: 1337kavin/piped
+      # -- image tag
+      # @chart.appVersion
+      tag: "latest@sha256:1f38b992ce02a50afddbbf68be1ac11cff6953d36fd8fa2b98c08a19f8ef06e7"  # Manifest index / Index Digest
+      # -- image pull policy
+      pullPolicy: IfNotPresent
+
+    # resources:
+    #  requests:
+    #    memory: 500Mi
+    #  limits:
+    #    memory: 1500Mi
+
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: tailscale
+      primary: true
+      hosts:
+        - host: piped.cloud.obara.xyz
+          paths:
+            - path: "/"
+
+    backend:
+      enabled: true
+      ingressClassName: tailscale
+      primary: false
+      hosts:
+        - host: pipedapi.cloud.obara.xyz
+          paths:
+            - path: "/"
+
+    ytproxy:
+      enabled: true
+      ingressClassName: tailscale
+      primary: false
+      hosts:
+        - host: ytproxy.cloud.obara.xyz
+          paths:
+            - path: "/"

@@ -3,3 +3,6 @@ apps:
     scribblers:
       deploy: true
       namespace: default
+    piped:
+      deploy: true
+      namespace: default

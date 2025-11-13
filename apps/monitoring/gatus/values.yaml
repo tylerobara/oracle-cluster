@@ -24,7 +24,7 @@ database:
 gatus:
   image:
     repository: "ghcr.io/twin/gatus"
-    tag: "v5.24.3"
+    tag: "v5.31.0"
   ingress:
     enabled: true
     ingressClassName: "traefik"
