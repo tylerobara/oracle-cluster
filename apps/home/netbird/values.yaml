@@ -16,3 +16,6 @@ netbird-dashboard:
     className: "traefik"
     hosts:
       - host: netbird.cloud.obara.xyz
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
