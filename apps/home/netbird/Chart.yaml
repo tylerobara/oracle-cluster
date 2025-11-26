@@ -1,0 +1,8 @@
+apiVersion: v2
+name: netbird
+version: 1.0.0
+
+dependencies:
+  - name: netbird
+    repository: https://charts.jaconi.io
+    version: 0.15.0

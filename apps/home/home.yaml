@@ -7,3 +7,6 @@ apps:
       deploy: false
       namespace: default
       serverSideApply: true
+    netbird:
+      deploy: true
+      namespace: default

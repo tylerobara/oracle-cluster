@@ -1,0 +1,9 @@
+netbird:
+  management:
+    ingress:
+      enabled: true
+      className: "traefik"
+      annotations:
+      hosts:
+        api:
+          host: nb.cloud.obara.xyz
