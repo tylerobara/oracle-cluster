@@ -6,3 +6,6 @@ dependencies:
   - name: netbird
     repository: https://charts.jaconi.io
     version: 0.15.0
+  - name: netbird-dashboard
+    repository: https://charts.jaconi.io
+    version: 1.2.0

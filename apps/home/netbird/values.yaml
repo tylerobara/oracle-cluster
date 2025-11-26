@@ -7,3 +7,12 @@ netbird:
       hosts:
         api:
           host: nb.cloud.obara.xyz
+        grpc:
+          host: nb-grpc.cloud.obara.xyz
+
+netbird-dashboard:
+  ingress:
+    enabled: true
+    className: "traefik"
+    hosts:
+      - host: netbird.cloud.obara.xyz
