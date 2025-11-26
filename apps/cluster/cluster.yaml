@@ -52,3 +52,6 @@ apps:
     postgresus:
       deploy: true
       namespace: default
+    cert-manager:
+      deploy: true
+      namespace: kube-system
