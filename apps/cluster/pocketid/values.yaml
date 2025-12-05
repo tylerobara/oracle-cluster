@@ -29,7 +29,7 @@ app-template:
         main:
           image:
             repository: 11notes/pocket-id
-            tag: 1.15.0
+            tag: 1.16.0
             pullPolicy: IfNotPresent
           env:
             TZ: "America/New_York"
