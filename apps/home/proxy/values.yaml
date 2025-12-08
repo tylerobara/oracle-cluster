@@ -8,6 +8,22 @@ proxy:
             repository: ghcr.io/tylerobara/proxy
             tag: 'main'
             pullPolicy: IfNotPresent
+          env:
+            - name: SOURCE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: proxy-secrets
+                  key: source_url
+            - name: APP_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: proxy-secrets
+                  key: username
+            - name: APP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: proxy-secrets
+                  key: password
 
   service:
     proxy:
@@ -28,3 +44,22 @@ proxy:
                 identifier: proxy
                 port: http
 
+externalSecrets:
+  secretStoreRef:
+    name: oracle-cluster-secret-store
+    kind: ClusterSecretStore
+  target:
+    name: proxy-secrets
+  data:
+  - secretKey: source_url
+    remoteRef:
+      key: default/proxy
+      property: source_url
+  - secretKey: username
+    remoteRef:
+      key: default/proxy
+      property: username
+  - secretKey: password
+    remoteRef:
+      key: default/proxy
+      property: password
