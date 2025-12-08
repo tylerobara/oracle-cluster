@@ -10,3 +10,6 @@ apps:
     netbird:
       deploy: true
       namespace: default
+    proxy:
+      deploy: true
+      namespace: default
