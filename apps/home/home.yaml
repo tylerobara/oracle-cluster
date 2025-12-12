@@ -8,7 +8,7 @@ apps:
       namespace: default
       serverSideApply: true
     netbird:
-      deploy: true
+      deploy: false
       namespace: default
     proxy:
       deploy: true
