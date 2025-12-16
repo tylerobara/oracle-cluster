@@ -11,5 +11,5 @@ apps:
       deploy: false
       namespace: default
     proxy:
-      deploy: true
+      deploy: false
       namespace: default

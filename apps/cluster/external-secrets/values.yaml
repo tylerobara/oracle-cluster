@@ -15,24 +15,4 @@ clusterSecretStores:
             name: "bao-token"
             namespace: "external-secrets"
             key: "token"
-  - name: infisical-cluster-secret-store
-    namespace: external-secrets
-    provider:
-      infisical:
-        hostAPI: https://app.infisical.com
-        auth:
-          universalAuthCredentials:
-            clientId:
-              key: clientId
-              namespace: external-secrets
-              name: universal-auth-credentials
-            clientSecret:
-              key: clientSecret
-              namespace: external-secrets
-              name: universal-auth-credentials
-        secretsScope:
-          projectSlug: example-project-26-na
-          environmentSlug: dev
-          secretsPath: /
-          recursive: false
-          expandSecretReferences: false # Default is true
+
