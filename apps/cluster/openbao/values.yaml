@@ -1,5 +1,7 @@
 openbao:
   server:
+    dataStorage:
+      size: 2Gi
     ingress:
       enabled: true
       annotations:
