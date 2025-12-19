@@ -37,7 +37,7 @@ traefik:
           scheme: https
           permanent: true
     forgejo-ssh:
-      port: "2222"
+      port: 2222
       expose:
         default: true
     jitsi-videobridge:
