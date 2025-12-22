@@ -6,7 +6,7 @@ postgresus:
         main:
           image:
             repository: rostislavdugin/postgresus
-            tag: v2.5.0
+            tag: v2.14.0
             pullPolicy: IfNotPresent
 
   service:
