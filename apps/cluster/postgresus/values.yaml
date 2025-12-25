@@ -43,4 +43,4 @@ postgresus:
       accessMode: ReadWriteOnce
       size: 100Mi
       globalMounts:
-        - path: /postgresus-data
+        - path: /databasus-data
