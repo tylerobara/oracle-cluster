@@ -5,8 +5,8 @@ postgresus:
       containers:
         main:
           image:
-            repository: rostislavdugin/postgresus
-            tag: v2.14.0
+            repository: databasus/databasus
+            tag: v2.16.2
             pullPolicy: IfNotPresent
 
   service:
