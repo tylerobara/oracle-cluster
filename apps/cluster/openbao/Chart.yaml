@@ -7,5 +7,5 @@ sources:
 
 dependencies:
   - name: openbao
-    version: 0.21.1
+    version: 0.23.3
     repository: https://openbao.github.io/openbao-helm
