@@ -1,4 +1,8 @@
 gitea-mirror:
+  defaultPodOptions:
+    securityContext:
+      fsGroup: 1001
+
   controllers:
     gitea-mirror:
       strategy: Recreate
