@@ -1,0 +1,73 @@
+gitea-mirror:
+  controllers:
+    gitea-mirror:
+      strategy: Recreate
+      containers:
+        main:
+          image:
+            repository: ghcr.io/raylabshq/gitea-mirror
+            tag: '2496d6f'
+            pullPolicy: IfNotPresent
+          env:
+            BETTER_AUTH_URL: "https://forgejo-mirror.cloud.obara.xyz"
+            ENCRYPTION_SECRET:
+              valueFrom:
+                secretKeyRef:
+                  name: gitea-mirror-secrets
+                  key: ENCRYPTION_SECRET
+            BETTER_AUTH_SECRET:
+              valueFrom:
+                secretKeyRef:
+                  name: gitea-mirror-secrets
+                  key: BETTER_AUTH_SECRET
+  service:
+    gitea-mirror:
+      controller: gitea-mirror
+      ports:
+        http:
+          port: 4321
+
+  ingress:
+    gitea-mirror:
+      annotations: 
+        kubernetes.io/ingress.class: traefik
+        gethomepage.dev/href: "https://forgejo-mirror.cloud.obara.xyz"
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/name: "Forgejo Mirror"
+        gethomepage.dev/description: "Code Sharing"
+        gethomepage.dev/group: "Development"
+        gethomepage.dev/icon: "sh-gitea-mirror.svg"
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-traefik-oidc-auth@kubernetescrd
+      className: "traefik"
+      hosts:
+        - host: forgejo-mirror.cloud.obara.xyz
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                identifier: gitea-mirror
+                port: http
+
+  persistence:
+    data:
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 300Mi
+      globalMounts:
+        - path: /app/data
+
+externalSecrets:
+  secretStoreRef:
+    name: oracle-cluster-secret-store
+    kind: ClusterSecretStore
+  target:
+    name: gitea-mirror-secrets
+  data:
+  - secretKey: ENCRYPTION_SECRET
+    remoteRef:
+      key: development/gitea-mirror
+      property: ENCRYPTION_SECRET
+  - secretKey: BETTER_AUTH_SECRET
+    remoteRef:
+      key: development/gitea-mirror
+      property: BETTER_AUTH_SECRET

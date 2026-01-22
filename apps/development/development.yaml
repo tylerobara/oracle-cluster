@@ -24,3 +24,6 @@ apps:
     postgres-test:
       deploy: false
       namespace: development
+    gitea-mirror:
+      deploy: true
+      namespace: development

@@ -40,12 +40,6 @@ traefik:
       port: 2222
       expose:
         default: true
-    jitsi-videobridge:
-      port: 10000
-      exposedPort: 10000
-      protocol: UDP
-      expose:
-        default: true
 
   tlsStore:
     default:
