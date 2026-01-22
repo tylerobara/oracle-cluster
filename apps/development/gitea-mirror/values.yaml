@@ -40,7 +40,7 @@ gitea-mirror:
         gethomepage.dev/name: "Forgejo Mirror"
         gethomepage.dev/description: "Code Sharing"
         gethomepage.dev/group: "Development"
-        gethomepage.dev/icon: "sh-gitea-mirror.svg"
+        gethomepage.dev/icon: "sh-gitea-mirror.png"
         traefik.ingress.kubernetes.io/router.middlewares: traefik-traefik-oidc-auth@kubernetescrd
       className: "traefik"
       hosts:

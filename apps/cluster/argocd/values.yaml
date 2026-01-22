@@ -6,6 +6,12 @@ argocd:
       hostname: argo.cloud.obara.xyz
       annotations:
         kubernetes.io/ingress.class: traefik
+        gethomepage.dev/href: "https://argo.cloud.obara.xyz"
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/name: "ArgoCD"
+        gethomepage.dev/description: "Continuous Delivery"
+        gethomepage.dev/group: "Development"
+        gethomepage.dev/icon: "sh-argocd.svg"
   configs:
     cm:
       admin.enabled: "false"

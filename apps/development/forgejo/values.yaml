@@ -35,7 +35,14 @@ forgejo:
   ingress:
     enabled: true
     className: traefik
-    annotations: {}
+    annotations:
+      kubernetes.io/ingress.class: traefik
+      gethomepage.dev/href: "https://git.cloud.obara.xyz"
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: "forgejo"
+      gethomepage.dev/description: "Git Server"
+      gethomepage.dev/group: "Development"
+      gethomepage.dev/icon: "sh-forgejo.svg"
     hosts:
       - host: git.cloud.obara.xyz
         paths:

@@ -20,12 +20,12 @@ postgresus:
     postgresus:
       annotations: 
         kubernetes.io/ingress.class: traefik
-        gethomepage.dev/href: "https://postgresus.cloud.obara.xyz"
+        gethomepage.dev/href: "https://databasus.cloud.obara.xyz"
         gethomepage.dev/enabled: "true"
-        gethomepage.dev/name: "postgresus"
+        gethomepage.dev/name: "Databasus"
         gethomepage.dev/description: "Code Sharing"
         gethomepage.dev/group: "Development"
-        gethomepage.dev/icon: "sh-postgresus.svg"
+        gethomepage.dev/icon: "sh-databasus.svg"
         traefik.ingress.kubernetes.io/router.middlewares: traefik-traefik-oidc-auth@kubernetescrd
       className: "traefik"
       hosts:

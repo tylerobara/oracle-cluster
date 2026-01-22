@@ -59,9 +59,9 @@ app-template:
         kubernetes.io/ingress.class: traefik
         gethomepage.dev/href: "https://id.cloud.obara.xyz"
         gethomepage.dev/enabled: "true"
-        gethomepage.dev/name: "pocketid"
+        gethomepage.dev/name: "PocketId"
         gethomepage.dev/description: "IdP"
-        gethomepage.dev/group: "Misc"
+        gethomepage.dev/group: "Identity"
         gethomepage.dev/icon: "sh-pocket-id.png"
       hosts:
         - host: id.cloud.obara.xyz
