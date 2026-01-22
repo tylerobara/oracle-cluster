@@ -109,13 +109,11 @@ forgejo:
 
     # Either specify inline `key` and `secret` or refer to them via `existingSecret`
     ## @param gitea.oauth OAuth configuration
-    oauth: []
-      # - name: 'OAuth 1'
-      #   provider:
-      #   key:
-      #   secret:
-      #   existingSecret:
-      #   autoDiscoverUrl:
+    oauth:
+      - name: 'PocketID'
+        provider: openidConnect
+        existingSecret: forgejo-secrets
+        autoDiscoverUrl: https://id.cloud.obara.xyz/.well-known/openid-configuration
       #   useCustomUrls:
       #   customAuthUrl:
       #   customTokenUrl:
@@ -322,3 +320,20 @@ forgejo:
 
   postgresql-ha:
     enabled: false
+
+
+externalSecrets:
+  secretStoreRef:
+    name: oracle-cluster-secret-store
+    kind: ClusterSecretStore
+  target:
+    name: forgejo-secrets
+  data:
+  - secretKey: key
+    remoteRef:
+      key: development/forgejo
+      property: key
+  - secretKey: secret
+    remoteRef:
+      key: development/forgejo
+      property: secret
