@@ -11,7 +11,7 @@ argocd:
         gethomepage.dev/name: "ArgoCD"
         gethomepage.dev/description: "Continuous Delivery"
         gethomepage.dev/group: "Development"
-        gethomepage.dev/icon: "sh-argocd.svg"
+        gethomepage.dev/icon: "sh-argo-cd.svg"
   configs:
     cm:
       admin.enabled: "false"
