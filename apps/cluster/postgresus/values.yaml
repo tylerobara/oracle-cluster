@@ -29,7 +29,7 @@ postgresus:
         traefik.ingress.kubernetes.io/router.middlewares: traefik-traefik-oidc-auth@kubernetescrd
       className: "traefik"
       hosts:
-        - host: postgresus.cloud.obara.xyz
+        - host: databasus.cloud.obara.xyz
           paths:
             - path: /
               pathType: Prefix
