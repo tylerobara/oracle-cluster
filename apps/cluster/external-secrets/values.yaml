@@ -15,4 +15,3 @@ clusterSecretStores:
             name: "bao-token"
             namespace: "external-secrets"
             key: "token"
-
