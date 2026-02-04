@@ -3,7 +3,7 @@ name: gitea-mirror
 version: 1.0.0
 
 sources:
-  - https://github.com/jordan-dalby/ByteStash
+  - https://github.com/RayLabsHQ/gitea-mirror
 
 dependencies:
   - name: app-template
