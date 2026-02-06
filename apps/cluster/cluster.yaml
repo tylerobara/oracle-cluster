@@ -49,6 +49,13 @@ apps:
     openbao:
       deploy: true
       namespace: openbao
+      # ignoreDifferences:
+      #   - group: admissionregistration.k8s.io/v1
+      #     kind: MutatingWebhookConfiguration
+      #     jqPathExpressions:
+      #       - .spec.data[]?.remoteRef.conversionStrategy
+      #       - .spec.data[]?.remoteRef.decodingStrategy
+      #       - .spec.data[]?.remoteRef.metadataPolicy
     postgresus:
       deploy: true
       namespace: default

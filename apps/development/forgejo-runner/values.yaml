@@ -1,7 +1,6 @@
 forgejo-runner:
   runner:
     config:
-      # -- create a secret by run: forgejo-runner register --no-interactive --token {TOKEN} --name runner --instance https://next.forgejo.org
       create: true
       instance: https://git.cloud.obara.xyz
       name: forgejo-runner-01
