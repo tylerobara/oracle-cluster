@@ -36,6 +36,10 @@ externalSecrets:
     remoteRef:
       key: default/authentik
       property: db_password
+  - secretKey: AUTHENTIK_SECRET_KEY
+    remoteRef:
+      key: default/authentik
+      property: secret_key
 
 authentik:
   authentik:
@@ -43,13 +47,40 @@ authentik:
     error_reporting:
       enabled: false
     postgresql:
-      password: "ThisIsNotASecurePassword"
+      host: authentik-rw
+      user: file:///postgres-creds/username
+      password: file:///postgres-creds/password
 
   server:
+    env:
+      - name: AUTHENTIK_SECRET_KEY
+        valueFrom:
+          secretKeyRef:
+            name: authentik-secrets
+            key: secret_key
+    volumes:
+      - name: postgres-creds
+        secret:
+          secretName: authentik-secrets
+    volumeMounts:
+      - name: postgres-creds
+        mountPath: /postgres-creds
+        readOnly: true
     ingress:
+      ingressClassName: "traefik"
       enabled: true
       hosts:
-        - authentik.domain.tld
+        - auth.cloud.obara.xyz
+
+  worker:
+    volumes:
+      - name: postgres-creds
+        secret:
+          secretName: authentik-secrets
+    volumeMounts:
+      - name: postgres-creds
+        mountPath: /postgres-creds
+        readOnly: true
 
   postgresql:
     enabled: false
