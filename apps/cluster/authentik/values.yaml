@@ -1,0 +1,39 @@
+database:
+  image:
+    registry: ghcr.io
+    repository: cloudnative-pg/postgresql
+    tag: 18
+
+  clusterName: authentik
+  logLevel: error
+  replicas: 1
+  size: 200Mi
+
+  monitoring:
+    enabled: false
+
+  backups:
+    enabled: false
+    secretName: ''
+    retention: ''
+    path: ''
+    endpoint: ''
+
+  topologySpreadConstraints:
+
+authentik:
+  authentik:
+    secret_key: "PleaseGenerateA50CharKey"
+    error_reporting:
+      enabled: false
+    postgresql:
+      password: "ThisIsNotASecurePassword"
+
+  server:
+    ingress:
+      enabled: true
+      hosts:
+        - authentik.domain.tld
+
+  postgresql:
+    enabled: false

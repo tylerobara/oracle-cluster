@@ -62,3 +62,6 @@ apps:
     cert-manager:
       deploy: true
       namespace: kube-system
+    authentik:
+      deploy: true
+      namespace: default
