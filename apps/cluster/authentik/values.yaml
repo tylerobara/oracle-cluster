@@ -36,7 +36,7 @@ externalSecrets:
     remoteRef:
       key: default/authentik
       property: db_password
-  - secretKey: AUTHENTIK_SECRET_KEY
+  - secretKey: secret_key
     remoteRef:
       key: default/authentik
       property: secret_key
