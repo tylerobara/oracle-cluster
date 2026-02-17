@@ -58,14 +58,26 @@ authentik:
           secretKeyRef:
             name: authentik-secrets
             key: secret_key
-    volumes:
-      - name: postgres-creds
-        secret:
-          secretName: authentik-secrets
-    volumeMounts:
-      - name: postgres-creds
-        mountPath: /postgres-creds
-        readOnly: true
+      - name: AUTHENTIK_POSTGRESQL__HOST
+        valueFrom:
+          secretKeyRef:
+            name: authentik-app
+            key: host
+      - name: AUTHENTIK_POSTGRESQL__USER
+        valueFrom:
+          secretKeyRef:
+            name: authentik-app
+            key: user
+      - name: AUTHENTIK_POSTGRESQL__PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: authentik-app
+            key: password
+      - name: AUTHENTIK_POSTGRESQL__PORT
+        value: "5432"
+      - name: AUTHENTIK_POSTGRESQL__NAME
+        value: "authentik"
+
     ingress:
       ingressClassName: "traefik"
       enabled: true
@@ -73,14 +85,31 @@ authentik:
         - auth.cloud.obara.xyz
 
   worker:
-    volumes:
-      - name: postgres-creds
-        secret:
-          secretName: authentik-secrets
-    volumeMounts:
-      - name: postgres-creds
-        mountPath: /postgres-creds
-        readOnly: true
+    env:
+      - name: AUTHENTIK_SECRET_KEY
+        valueFrom:
+          secretKeyRef:
+            name: authentik-secrets
+            key: secret_key
+      - name: AUTHENTIK_POSTGRESQL__HOST
+        valueFrom:
+          secretKeyRef:
+            name: authentik-app
+            key: host
+      - name: AUTHENTIK_POSTGRESQL__USER
+        valueFrom:
+          secretKeyRef:
+            name: authentik-app
+            key: user
+      - name: AUTHENTIK_POSTGRESQL__PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: authentik-app
+            key: password
+      - name: AUTHENTIK_POSTGRESQL__PORT
+        value: "5432"
+      - name: AUTHENTIK_POSTGRESQL__NAME
+        value: "authentik"
 
   postgresql:
     enabled: false
