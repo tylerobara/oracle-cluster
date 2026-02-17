@@ -21,6 +21,22 @@ database:
 
   topologySpreadConstraints:
 
+externalSecrets:
+  secretStoreRef:
+    name: oracle-cluster-secret-store
+    kind: ClusterSecretStore
+  target:
+    name: authentik-secrets
+  data:
+  - secretKey: username
+    remoteRef:
+      key: default/authentik
+      property: db_username
+  - secretKey: password
+    remoteRef:
+      key: default/authentik
+      property: db_password
+
 authentik:
   authentik:
     secret_key: "PleaseGenerateA50CharKey"
@@ -37,3 +53,4 @@ authentik:
 
   postgresql:
     enabled: false
+
