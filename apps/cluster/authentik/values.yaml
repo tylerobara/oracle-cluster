@@ -7,7 +7,7 @@ database:
   clusterName: authentik
   logLevel: error
   replicas: 1
-  size: 200Mi
+  size: 4Gi
 
   monitoring:
     enabled: false
