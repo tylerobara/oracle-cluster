@@ -7,7 +7,9 @@ metadata:
 spec:
   instances: {{ .Values.database.replicas }}
   imageName: {{ .Values.database.image.registry }}/{{ .Values.database.image.repository }}:{{ .Values.database.image.tag }}
-
+  bootstrap:
+      initdb:
+        database: authentik
   storage:
     size: {{ .Values.database.size }}
     {{- if hasKey .Values.database "storageClass" }}
