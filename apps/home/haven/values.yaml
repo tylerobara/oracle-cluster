@@ -27,4 +27,4 @@ haven:
 
   image:
     repository: ghcr.io/tylerobara/haven
-    tag: "v1.9.1"
+    tag: 1.9.2
