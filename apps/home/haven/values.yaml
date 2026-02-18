@@ -24,3 +24,7 @@ haven:
     host: "0.0.0.0"
     server_name: "Chat"
     admin_user: "superadmin"
+
+  image:
+    repository: ghcr.io/tylerobara/haven
+    tag: "v1.9.1"
