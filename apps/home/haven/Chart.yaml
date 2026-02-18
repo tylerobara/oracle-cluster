@@ -1,0 +1,9 @@
+apiVersion: v2
+name: haven
+version: 1.0.0
+
+
+dependencies:
+  - name: haven
+    version: 0.1.3
+    repository: oci://ghcr.io/tylerobara/helm-charts

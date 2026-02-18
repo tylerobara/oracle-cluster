@@ -1,0 +1,26 @@
+haven:
+  ingress:
+    enabled: true
+    className: "traefik"
+    annotations:
+      gethomepage.dev/href: "https://haven.cloud.obara.xyz"
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: "Haven"
+      gethomepage.dev/description: "Haven Application"
+      gethomepage.dev/group: "Media"
+      gethomepage.dev/icon: "sh-haven.svg"
+    hosts:
+      - host: haven.cloud.obara.xyz
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls: []
+
+  service:
+    annotations:
+      traefik.ingress.kubernetes.io/service.serversscheme: https
+
+  haven:
+    host: "0.0.0.0"
+    server_name: "Chat"
+    admin_user: "superadmin"

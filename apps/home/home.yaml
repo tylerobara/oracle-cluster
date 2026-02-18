@@ -3,13 +3,6 @@ apps:
     scribblers:
       deploy: true
       namespace: default
-    piped:
-      deploy: false
-      namespace: default
-      serverSideApply: true
-    netbird:
-      deploy: false
-      namespace: default
-    proxy:
-      deploy: false
+    haven:
+      deploy: true
       namespace: default
