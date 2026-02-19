@@ -8,6 +8,7 @@ database:
   logLevel: error
   replicas: 1
   size: 4Gi
+  storageClass: longhorn
 
   monitoring:
     enabled: false
