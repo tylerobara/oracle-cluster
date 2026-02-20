@@ -5,5 +5,5 @@ version: 1.0.0
 
 dependencies:
   - name: haven
-    version: 0.2.0
+    version: 0.2.1
     repository: oci://ghcr.io/tylerobara/helm-charts
