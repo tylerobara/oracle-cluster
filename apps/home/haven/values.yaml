@@ -26,4 +26,5 @@ haven:
     admin_user: "superadmin"
 
   image:
-    repository: ghcr.io/tylerobara/haven
+    repository: ghcr.io/ancsemi/haven
+    tag: 2.5.5

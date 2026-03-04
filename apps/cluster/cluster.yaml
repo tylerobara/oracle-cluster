@@ -63,5 +63,5 @@ apps:
       deploy: true
       namespace: kube-system
     authentik:
-      deploy: true
+      deploy: false
       namespace: default
