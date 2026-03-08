@@ -41,6 +41,11 @@ traefik:
       port: 2222
       expose:
         default: true
+    websecure:
+      http:
+        transport:
+          respondingTimeouts:
+            readTimeout: 180s
 
   tlsStore:
     default:
