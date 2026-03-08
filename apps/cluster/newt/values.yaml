@@ -1,6 +1,7 @@
 newt:
   newtInstances:
     - name: "oracle-cluster-tunnel"
+      enabled: true
       auth:
         existingSecretName: "newt-secrets"
 
