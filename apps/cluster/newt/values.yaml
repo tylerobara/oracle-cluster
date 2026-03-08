@@ -1,0 +1,25 @@
+newt:
+  newtInstances:
+    - name: "oracle-cluster-tunnel"
+      auth:
+        existingSecretName: "newt-secrets"
+
+externalSecrets:
+  secretStoreRef:
+    name: oracle-cluster-secret-store
+    kind: ClusterSecretStore
+  target:
+    name: newt-secrets
+  data:
+  - secretKey: PANGOLIN_ENDPOINT
+    remoteRef:
+      key: cluster/newt
+      property: PANGOLIN_ENDPOINT
+  - secretKey: NEWT_ID
+    remoteRef:
+      key: cluster/newt
+      property: NEWT_ID
+  - secretKey: NEWT_SECRET
+    remoteRef:
+      key: cluster/newt
+      property: NEWT_SECRET
