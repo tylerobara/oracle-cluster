@@ -31,11 +31,12 @@ traefik:
 
   ports:
     web:
-      redirections:
-        entryPoint:
-          to: websecure
-          scheme: https
-          permanent: true
+      http:
+        redirections:
+          entryPoint:
+            to: websecure
+            scheme: https
+            permanent: true
     forgejo-ssh:
       port: 2222
       expose:
@@ -60,7 +61,7 @@ traefik:
     plugins:
       traefik-oidc-auth:
         moduleName: "github.com/sevensolutions/traefik-oidc-auth"
-        version: "v0.17.0"
+        version: "v0.18.0"
 
   service:
     loadBalancerIP: "10.0.0.68"
