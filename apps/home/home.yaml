@@ -4,5 +4,5 @@ apps:
       deploy: true
       namespace: default
     haven:
-      deploy: true
+      deploy: false
       namespace: default

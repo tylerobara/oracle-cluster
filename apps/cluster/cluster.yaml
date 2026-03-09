@@ -66,5 +66,5 @@ apps:
       deploy: false
       namespace: default
     newt:
-      deploy: true
+      deploy: false
       namespace: kube-system
