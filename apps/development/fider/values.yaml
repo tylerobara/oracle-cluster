@@ -37,6 +37,8 @@ fider:
             pullPolicy: IfNotPresent
           env:
             BASE_URL: https://fider.cloud.obara.xyz
+            EMAIL_SMTP_HOST: mailhog
+            EMAIL_SMTP_PORT: 8025
             DATABASE_URL:
               valueFrom:
                 secretKeyRef:
@@ -52,12 +54,26 @@ fider:
                 secretKeyRef:
                   name: fider-secrets
                   key: EMAIL_NOREPLY
+    mailhog:
+      strategy: Recreate
+      containers:
+        main:
+          image:
+            repository: mailhog/mailhog
+            tag: latest
+            pullPolicy: IfNotPresent
+
   service:
     fider:
       controller: fider
       ports:
         http:
           port: 3000
+    mailhog:
+      controller: mailhog
+      ports:
+        http:
+          port: 8025
 
   ingress:
     fider:
