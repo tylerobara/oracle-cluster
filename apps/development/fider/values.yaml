@@ -85,7 +85,7 @@ fider:
         gethomepage.dev/description: "Feedback and Ideas"
         gethomepage.dev/group: "Development"
         gethomepage.dev/icon: "sh-fider.png"
-        traefik.ingress.kubernetes.io/router.middlewares: traefik-traefik-oidc-auth@kubernetescrd
+        # traefik.ingress.kubernetes.io/router.middlewares: traefik-traefik-oidc-auth@kubernetescrd
       className: "traefik"
       hosts:
         - host: fider.cloud.obara.xyz
