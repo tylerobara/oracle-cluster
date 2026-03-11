@@ -47,6 +47,11 @@ fider:
                 secretKeyRef:
                   name: fider-secrets
                   key: JWT_SECRET
+            EMAIL_NOREPLY:
+              valueFrom:
+                secretKeyRef:
+                  name: fider-secrets
+                  key: EMAIL_NOREPLY
   service:
     fider:
       controller: fider
@@ -94,3 +99,7 @@ externalSecrets:
     remoteRef:
       key: development/fider
       property: JWT_SECRET
+  - secretKey: EMAIL_NOREPLY
+    remoteRef:
+      key: development/fider
+      property: EMAIL_NOREPLY
