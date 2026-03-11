@@ -1,0 +1,96 @@
+database:
+  image:
+    registry: ghcr.io
+    repository: cloudnative-pg/postgresql
+    tag: 17
+
+  clusterName: fider
+  logLevel: error
+  replicas: 1
+  size: 1Gi
+
+  monitoring:
+    enabled: false
+
+  backups:
+    enabled: false
+    secretName: ''
+    retention: ''
+    path: ''
+    endpoint: ''
+
+  topologySpreadConstraints:
+
+fider:
+  defaultPodOptions:
+    securityContext:
+      fsGroup: 1001
+
+  controllers:
+    fider:
+      strategy: Recreate
+      containers:
+        main:
+          image:
+            repository: getfider/fider
+            tag: main
+            pullPolicy: IfNotPresent
+          env:
+            BASE_URL: https://fider.cloud.obara.xyz
+            DATABASE_URL:
+              valueFrom:
+                secretKeyRef:
+                  name: fider-app
+                  key: fqdn-uri
+            JWT_SECRET:
+              valueFrom:
+                secretKeyRef:
+                  name: fider-secrets
+                  key: JWT_SECRET
+  service:
+    fider:
+      controller: fider
+      ports:
+        http:
+          port: 3000
+
+  ingress:
+    fider:
+      annotations: 
+        kubernetes.io/ingress.class: traefik
+        gethomepage.dev/href: "https://fider.cloud.obara.xyz"
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/name: "Fider"
+        gethomepage.dev/description: "Feedback and Ideas"
+        gethomepage.dev/group: "Development"
+        gethomepage.dev/icon: "sh-fider.png"
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-traefik-oidc-auth@kubernetescrd
+      className: "traefik"
+      hosts:
+        - host: fider.cloud.obara.xyz
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                identifier: fider
+                port: http
+
+  # persistence:
+  #   data:
+  #     type: persistentVolumeClaim
+  #     accessMode: ReadWriteOnce
+  #     size: 300Mi
+  #     globalMounts:
+  #       - path: /app/data
+
+externalSecrets:
+  secretStoreRef:
+    name: oracle-cluster-secret-store
+    kind: ClusterSecretStore
+  target:
+    name: fider-secrets
+  data:
+  - secretKey: JWT_SECRET
+    remoteRef:
+      key: development/fider
+      property: JWT_SECRET

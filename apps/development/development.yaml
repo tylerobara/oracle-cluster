@@ -27,3 +27,6 @@ apps:
     gitea-mirror:
       deploy: true
       namespace: development
+    fider:
+      deploy: true
+      namespace: development

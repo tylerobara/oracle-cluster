@@ -1,0 +1,12 @@
+apiVersion: v2
+name: fider
+version: 1.0.0
+
+sources:
+  - https://fider.io
+
+dependencies:
+  - name: app-template
+    repository: https://bjw-s-labs.github.io/helm-charts
+    version: 4.6.2
+    alias: fider
