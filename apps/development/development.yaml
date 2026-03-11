@@ -28,5 +28,5 @@ apps:
       deploy: true
       namespace: development
     fider:
-      deploy: true
+      deploy: false
       namespace: development
