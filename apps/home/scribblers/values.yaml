@@ -9,7 +9,7 @@ scribblers:
         main:
           image:
             repository: biosmarcel/scribble.rs
-            tag: 'v0.9.8'
+            tag: 'v0.9.12'
             pullPolicy: IfNotPresent
 
   service:
@@ -37,4 +37,3 @@ scribblers:
               service:
                 identifier: scribblers
                 port: http
-
