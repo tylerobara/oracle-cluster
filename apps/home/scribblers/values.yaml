@@ -9,7 +9,7 @@ scribblers:
         main:
           image:
             repository: biosmarcel/scribble.rs
-            tag: 'v0.9.12'
+            tag: 'v0.9.12@sha256:d434ef3309fd6d22c669c651cf62eb4cb3ad0359ffb546e73824d6a0f34b3f92'
             pullPolicy: IfNotPresent
 
   service:
