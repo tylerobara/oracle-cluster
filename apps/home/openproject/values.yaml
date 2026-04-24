@@ -875,8 +875,8 @@ openproject:
       ## In case your secret does not use the default keys in the secret, you can adjust them here.
       ##
       secretKeys:
-        adminPasswordKey: "pg-admin-password"
-        userPasswordKey: "pg-user-password"
+        adminPasswordKey: "pg-admin-pass"
+        userPasswordKey: "pg-user-pass"
 
       ## Database username.
       #
