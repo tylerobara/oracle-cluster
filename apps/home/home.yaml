@@ -7,6 +7,6 @@ apps:
       deploy: true
       namespace: default
     openproject:
-      deploy: true
+      deploy: false
       namespace: default
       serverSideApply: true
