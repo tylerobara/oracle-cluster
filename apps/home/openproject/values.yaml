@@ -13,10 +13,10 @@ externalSecrets:
     remoteRef:
       key: default/openproject/secrets
       property: oidc-secret
-  - secretKey: secret
+  - secretKey: adminPassword
     remoteRef:
       key: default/openproject/secrets
-      property: oidc-secret
+      property: admin-password
   - secretKey: pg-admin-pass
     remoteRef:
       key: default/openproject/secrets
@@ -597,16 +597,16 @@ openproject:
     # only applicable on first installation
     # c.f. https://www.openproject.org/docs/installation-and-operations/configuration/#initial-admin-user-creation
     admin_user:
-      password: "superadmin"
+      password: ""
       password_reset: "true"
       name: "OpenProject Admin"
       mail: "superadmin@boallcgroup.com"
 
-      secret: ""
+      secret: "openproject-secrets"
 
       ## In case your secret does not use the default key in the secret, you can adjust it here
       secretKeys:
-        password: ""
+        password: "adminPassword"
       # Uncomment if you want to lock the user after creation
       # Relevant for automated deployments that seed LDAP or SSO
       # locked: true
