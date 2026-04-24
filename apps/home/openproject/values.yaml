@@ -337,7 +337,8 @@ openproject:
 
     ## Override image repository to use Bitnami Secure images
     image:
-      repository: ghcr.io/rtvkiz/minimal-memcached
+      registry: "ghcr.io"
+      repository: rtvkiz/minimal-memcached
       tag: 1.6.41-r0@sha256:0d59f36da3db290823dc578fa186f77bb354603206e7aadbed5f72605196158d
 
     global:
