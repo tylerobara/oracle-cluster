@@ -6,3 +6,6 @@ apps:
     haven:
       deploy: true
       namespace: default
+    openproject:
+      deploy: true
+      namespace: default
