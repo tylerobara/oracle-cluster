@@ -818,7 +818,7 @@ openproject:
     ## When set to true, a postgres server will be deployed into current namespace, when false you have to provide your
     ## own database instance.
     #
-    bundled: false
+    bundled: true
 
     ## Override image repository to use Bitnami Secure images
     image:
