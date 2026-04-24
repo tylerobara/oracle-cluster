@@ -9,3 +9,4 @@ apps:
     openproject:
       deploy: true
       namespace: default
+      serverSideApply: true
