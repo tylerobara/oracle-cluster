@@ -579,7 +579,7 @@ openproject:
     cache:
       store: "memcache"
 
-    extraEnvVarsSecret: "openproject-env-vars-secret"
+    extraEnvVarsSecret: ""
 
     ## Force the language to seed the instance in.
     # Defaults to English if not set.
