@@ -106,7 +106,7 @@ openproject:
       repository: "postgres"
 
       # Postgres version to use
-      tag: 16
+      tag: 18
 
       ## Define a imagePullPolicy.
       ##
