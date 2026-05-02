@@ -339,7 +339,7 @@ openproject:
     image:
       registry: "ghcr.io"
       repository: rtvkiz/minimal-memcached
-      tag: 1.6.41-r0@sha256:d62e33ca64765d28416a69bbf31c30c3a8d718c3c26af43b4753d9be6410f091
+      tag: 1.6.41-r0@sha256:e76ff04042d8f048d81b2f6415dd9059901c1a1840df205cd82154168b583f40
 
     global:
       containerSecurityContext:
