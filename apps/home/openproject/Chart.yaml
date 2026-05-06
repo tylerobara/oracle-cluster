@@ -1,8 +1,0 @@
-apiVersion: v2
-name: openproject
-version: 1.0.0
-
-dependencies:
-  - name: openproject
-    version: 13.5.1
-    repository: https://charts.openproject.org

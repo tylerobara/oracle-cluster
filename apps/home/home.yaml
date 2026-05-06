@@ -6,7 +6,3 @@ apps:
     haven:
       deploy: true
       namespace: default
-    openproject:
-      deploy: false
-      namespace: default
-      serverSideApply: true
