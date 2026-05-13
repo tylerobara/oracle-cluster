@@ -3,9 +3,8 @@ kind: IngressRouteTCP
 metadata:
   name: forgejo-ssh
   namespace: development
-  annotations:
-    kubernetes.io/ingress.class: traefik
 spec:
+  ingressClassName: traefik
   entryPoints:
   - forgejo-ssh
   routes:
