@@ -2,7 +2,7 @@ traefik:
   image:
     registry: ghcr.io
     repository: 11notes/traefik
-    tag: 3.7.0-nobody@sha256:978a88209794be8b5cd89683bbe420179acbc4eee7771fe00c230a26849467ae
+    tag: 3.7.1-nobody@sha256:9fa5091f4f52ec0962c2a91deeae055b9e8358b2f1e456d4ce774fcc06c12f30
 
   ingressRoute:
     dashboard:
@@ -26,7 +26,6 @@ traefik:
   providers:
     kubernetesCRD:
       enabled: true
-      ingressClass: traefik
       allowExternalNameServices: true
     kubernetesIngress:
       enabled: true
