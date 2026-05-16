@@ -7,5 +7,5 @@ sources:
 
 dependencies:
 - name: external-secrets
-  version: 2.4.1
+  version: 2.5.0
   repository: https://charts.external-secrets.io
