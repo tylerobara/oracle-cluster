@@ -6,7 +6,7 @@ postgresus:
         main:
           image:
             repository: databasus/databasus
-            tag: v3.36.0
+            tag: v3.39.2
             pullPolicy: IfNotPresent
 
   service:
