@@ -7,5 +7,5 @@ sources:
 
 dependencies:
   - name: ntfy
-    version: 0.5.14
+    version: 0.5.15
     repository: oci://codeberg.org/wrenix/helm-charts
