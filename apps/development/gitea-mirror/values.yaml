@@ -10,7 +10,7 @@ gitea-mirror:
         main:
           image:
             repository: ghcr.io/raylabshq/gitea-mirror
-            tag: 'v3.16.1'
+            tag: 'v3.16.2'
             pullPolicy: IfNotPresent
           env:
             BETTER_AUTH_URL: "https://forgejo-mirror.cloud.obara.xyz"
