@@ -7,6 +7,6 @@ sources:
 
 dependencies:
 - name: argo-cd
-  version: 9.5.15
+  version: 9.5.19
   repository: https://argoproj.github.io/argo-helm
   alias: argocd
