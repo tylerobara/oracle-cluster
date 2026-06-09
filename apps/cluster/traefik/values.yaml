@@ -2,7 +2,7 @@ traefik:
   image:
     registry: ghcr.io
     repository: 11notes/traefik
-    tag: 3.7.1-nobody@sha256:9fa5091f4f52ec0962c2a91deeae055b9e8358b2f1e456d4ce774fcc06c12f30
+    tag: 3.7.4@sha256:30e6bf1d65a1fff565e5fb399836842356a6f66b844d52ebc2fcdda1cdf4d246
 
   ingressRoute:
     dashboard:
@@ -70,7 +70,7 @@ traefik:
     plugins:
       traefik-oidc-auth:
         moduleName: "github.com/sevensolutions/traefik-oidc-auth"
-        version: "v0.18.0"
+        version: "v0.20.1"
 
   service:
     loadBalancerIP: "10.0.0.68"
