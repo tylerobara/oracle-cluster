@@ -62,7 +62,6 @@ traefik:
     enabled: true
     filters:
       statusCodes: "400-599"
-      format: "json"
 
   gateway:
     enabled: false
