@@ -56,11 +56,12 @@ traefik:
       defaultCertificate:
         secretName: cloud-obara-xyz-tls
 
-  logs:
-    general:
-      level: "DEBUG"
-    access:
-      enabled: true
+  log:
+    level: "DEBUG"
+  accessLog:
+    enabled: true
+    filters:
+      statusCodes: "400-599"
       format: "json"
 
   gateway:
