@@ -27,4 +27,4 @@ haven:
 
   image:
     repository: ghcr.io/ancsemi/haven
-    tag: 3.32.0
+    tag: 3.33.0
