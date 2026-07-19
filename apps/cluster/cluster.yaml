@@ -63,7 +63,7 @@ apps:
       deploy: true
       namespace: kube-system
     authentik:
-      deploy: false
+      deploy: true
       namespace: default
     newt:
       deploy: false
