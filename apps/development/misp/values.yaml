@@ -1,5 +1,6 @@
 database:
   clusterName: misp
+  username: misp
   size: 10Gi
   storageClass: longhorn
   resources:
@@ -33,6 +34,10 @@ externalSecrets:
       remoteRef:
         key: development/misp
         property: gpg-passphrase
+    - secretKey: mysql-password
+      remoteRef:
+        key: development/misp
+        property: mysql-password
 
 misp:
   baseUrl: "https://misp.batrange.net"
@@ -127,13 +132,13 @@ app-template:
 
             MYSQL_HOST: "misp-db"
             MYSQL_PORT: "3306"
-            MYSQL_USER: root
+            MYSQL_USER: misp
             MYSQL_DATABASE: misp
             MYSQL_PASSWORD:
               valueFrom:
                 secretKeyRef:
-                  name: misp-db-root
-                  key: password
+                  name: misp-secrets
+                  key: mysql-password
 
             REDIS_HOST: "dragonfly-misp"
             REDIS_PORT: "6379"

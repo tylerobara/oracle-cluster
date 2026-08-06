@@ -7,6 +7,16 @@ spec:
 
   port: 3306
 
+  # MISP's entrypoint injects MYSQL_PASSWORD into database.php via `sed`, which
+  # mistreats `&`, `\` and `/` in the replacement text. mariadb-operator's
+  # auto-generated root password can contain those characters, so we bring our
+  # own sed-safe password for a dedicated app user instead of using root.
+  database: {{ .Values.database.clusterName }}
+  username: {{ .Values.database.username }}
+  passwordSecretKeyRef:
+    name: {{ .Values.externalSecrets.target.name }}
+    key: mysql-password
+
   storage:
     size: {{ .Values.database.size }}
     {{- if hasKey .Values.database "storageClass" }}
