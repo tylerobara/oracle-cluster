@@ -1,0 +1,247 @@
+database:
+  clusterName: misp
+  size: 10Gi
+  storageClass: longhorn
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      memory: 1Gi
+  metrics:
+    enabled: false
+
+cache:
+  clusterName: misp
+
+externalSecrets:
+  secretStoreRef:
+    name: oracle-cluster-secret-store
+    kind: ClusterSecretStore
+  target:
+    name: misp-secrets
+  data:
+    - secretKey: admin-password
+      remoteRef:
+        key: development/misp
+        property: admin-password
+    - secretKey: admin-key
+      remoteRef:
+        key: development/misp
+        property: admin-key
+    - secretKey: gpg-passphrase
+      remoteRef:
+        key: development/misp
+        property: gpg-passphrase
+
+misp:
+  baseUrl: "https://misp.batrange.net"
+  adminEmail: "tyler.obara@gmail.com"
+  adminOrg: "batrange"
+  uploadMaxFilesize: "50M"
+  coreTag: "v2.5.44"
+  modulesTag: "v3.0.9"
+  cronJobImage: registry.gitlab.com/gitlab-ci-utils/curl-jq:3.2.1
+  cronJobs:
+    - name: feeds-fetch-all
+      schedule: "30 2 * * *"
+      path: /feeds/fetchFromAllFeeds
+    - name: feeds-cache-all
+      schedule: "0 2 * * *"
+      path: /feeds/cacheFeeds/all
+    - name: servers-pull-all
+      schedule: "0 4 * * *"
+      path: /servers/pull/0/full
+    - name: servers-push-all
+      schedule: "30 4 * * *"
+      path: /servers/push/0
+    - name: update-galaxies
+      schedule: "0 3 * * *"
+      path: /galaxies/update
+    - name: update-noticelists
+      schedule: "15 3 * * *"
+      path: /noticelists/update
+    - name: update-taxonomies
+      schedule: "30 3 * * *"
+      path: /taxonomies/update
+    - name: update-warninglists
+      schedule: "45 3 * * *"
+      path: /warninglists/update
+
+app-template:
+  controllers:
+    misp:
+      strategy: Recreate
+      pod:
+        securityContext:
+          fsGroup: 33
+      containers:
+        main:
+          image:
+            repository: ghcr.io/misp/misp-docker/misp-core
+            tag: v2.5.44
+            pullPolicy: IfNotPresent
+          command:
+            - /kubernetes/entrypoint_fpm.sh
+          probes:
+            readiness:
+              enabled: true
+              port: 9002
+            liveness:
+              enabled: true
+              port: 9002
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              memory: 2048Mi
+          env:
+            DISABLE_PRINTING_PLAINTEXT_CREDENTIALS: "true"
+            ENABLE_BACKGROUND_UPDATES: "true"
+            PYTHONUNBUFFERED: "1"
+            TZ: "UTC"
+
+            BASE_URL: "https://misp.batrange.net"
+            ADMIN_EMAIL: "tyler.obara@gmail.com"
+            MISP_EMAIL: "tyler.obara@gmail.com"
+            MISP_CONTACT: "tyler.obara@gmail.com"
+            ADMIN_ORG: "batrange"
+            ADMIN_PASSWORD:
+              valueFrom:
+                secretKeyRef:
+                  name: misp-secrets
+                  key: admin-password
+            ADMIN_KEY:
+              valueFrom:
+                secretKeyRef:
+                  name: misp-secrets
+                  key: admin-key
+            GPG_PASSPHRASE:
+              valueFrom:
+                secretKeyRef:
+                  name: misp-secrets
+                  key: gpg-passphrase
+
+            MISP_MODULES_FQDN: "http://misp-modules:6666"
+
+            MYSQL_HOST: "misp-db"
+            MYSQL_PORT: "3306"
+            MYSQL_USER: root
+            MYSQL_DATABASE: misp
+            MYSQL_PASSWORD:
+              valueFrom:
+                secretKeyRef:
+                  name: misp-db-root
+                  key: password
+
+            REDIS_HOST: "dragonfly-misp"
+            REDIS_PORT: "6379"
+            ENABLE_REDIS_EMPTY_PASSWORD: "true"
+
+            PHP_UPLOAD_MAX_FILESIZE: "50M"
+            PHP_POST_MAX_SIZE: "50M"
+            NGINX_CLIENT_MAX_BODY_SIZE: "50M"
+    nginx:
+      strategy: Recreate
+      pod:
+        securityContext:
+          fsGroup: 33
+          runAsUser: 33
+      containers:
+        main:
+          image:
+            repository: ghcr.io/misp/misp-docker/misp-core
+            tag: v2.5.44
+            pullPolicy: IfNotPresent
+          command:
+            - /usr/bin/tini
+          args:
+            - nginx
+            - "--"
+            - "-g"
+            - "daemon off;"
+          probes:
+            readiness:
+              enabled: true
+              port: 8080
+          resources:
+            requests:
+              cpu: 50m
+              memory: 256Mi
+            limits:
+              memory: 512Mi
+          env:
+            # Ingress/TLS termination is handled outside this chart
+            DISABLE_SSL_REDIRECT: "true"
+    misp-modules:
+      strategy: Recreate
+      containers:
+        main:
+          image:
+            repository: ghcr.io/misp/misp-docker/misp-modules
+            tag: v3.0.9
+            pullPolicy: IfNotPresent
+          probes:
+            readiness:
+              enabled: true
+              port: 6666
+          resources:
+            requests:
+              cpu: 50m
+              memory: 256Mi
+            limits:
+              memory: 1Gi
+          env:
+            TZ: "UTC"
+
+  service:
+    php:
+      controller: misp
+      ports:
+        misp-php:
+          port: 9002
+    modules:
+      controller: misp-modules
+      ports:
+        misp-modules:
+          port: 6666
+    nginx:
+      controller: nginx
+      ports:
+        http:
+          port: 8080
+
+  persistence:
+    files:
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 20Gi
+      storageClass: longhorn
+      advancedMounts:
+        misp:
+          main:
+            - path: /var/www/MISP/app/files
+    gnupg:
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: longhorn
+      advancedMounts:
+        misp:
+          main:
+            - path: /var/www/MISP/.gnupg
+    logs:
+      type: emptyDir
+      advancedMounts:
+        misp:
+          main:
+            - path: /var/www/MISP/app/tmp/logs
+    nginx-conf:
+      type: configMap
+      name: misp-nginx-conf
+      advancedMounts:
+        nginx:
+          main:
+            - path: /etc/nginx/nginx.conf
+              subPath: nginx.conf

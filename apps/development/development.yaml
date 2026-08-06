@@ -30,3 +30,6 @@ apps:
     fider:
       deploy: false
       namespace: development
+    misp:
+      deploy: true
+      namespace: misp

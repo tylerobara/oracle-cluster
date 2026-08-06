@@ -1,0 +1,14 @@
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: Database
+metadata:
+  name: {{ .Values.database.clusterName }}-database
+spec:
+  # name of the logical database created inside the MariaDB instance
+  name: {{ .Values.database.clusterName }}
+  mariaDbRef:
+    name: {{ .Values.database.clusterName }}-db
+  characterSet: utf8mb4
+  collate: utf8mb4_general_ci
+  cleanupPolicy: Delete
+  requeueInterval: 10h
+  retryInterval: 30s
