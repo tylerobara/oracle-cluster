@@ -88,13 +88,19 @@ app-template:
             pullPolicy: IfNotPresent
           command:
             - /kubernetes/entrypoint_fpm.sh
+          # No liveness probe: MISP's first boot (GPG key generation, CA refresh,
+          # taxonomy/warninglist/galaxy imports) can take several minutes, well
+          # past any sane liveness failure window, and upstream's own manifests
+          # only use a readiness probe here for the same reason.
           probes:
             readiness:
               enabled: true
               port: 9002
-            liveness:
-              enabled: true
-              port: 9002
+              spec:
+                initialDelaySeconds: 30
+                periodSeconds: 15
+                timeoutSeconds: 5
+                failureThreshold: 40
           resources:
             requests:
               cpu: 100m
@@ -250,3 +256,9 @@ app-template:
           main:
             - path: /etc/nginx/nginx.conf
               subPath: nginx.conf
+    nginx-body:
+      type: emptyDir
+      advancedMounts:
+        nginx:
+          main:
+            - path: /var/lib/nginx
