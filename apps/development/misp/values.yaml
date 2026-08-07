@@ -46,7 +46,7 @@ misp:
   uploadMaxFilesize: "50M"
   coreTag: "v2.5.44"
   modulesTag: "v3.0.9"
-  cronJobImage: registry.gitlab.com/gitlab-ci-utils/curl-jq:3.2.1
+  cronJobImage: registry.gitlab.com/gitlab-ci-utils/curl-jq:3.2.3
   cronJobs:
     - name: feeds-fetch-all
       schedule: "30 2 * * *"
