@@ -107,7 +107,10 @@ forgejo:
         provider: openidConnect
         existingSecret: forgejo-secrets
         autoDiscoverUrl: https://id.cloud.obara.xyz/.well-known/openid-configuration
-
+      - name: 'keycloak'
+        provider: openidConnect
+        existingSecret: keycloak-client-secrets
+        autoDiscoverUrl: https://keycloak.cloud.obara.xyz/auth/realms/cac-auth-realm/.well-known/openid-configuration
 
     ## @param gitea.additionalConfigSources Additional configuration from secret or configmap
     additionalConfigSources: []
