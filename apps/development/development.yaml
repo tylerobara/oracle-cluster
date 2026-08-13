@@ -31,5 +31,5 @@ apps:
       deploy: false
       namespace: development
     misp:
-      deploy: true
+      deploy: false
       namespace: misp
