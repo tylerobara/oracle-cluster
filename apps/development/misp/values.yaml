@@ -84,7 +84,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/misp/misp-docker/misp-core
-            tag: v2.5.44
+            tag: v2.5.45
             pullPolicy: IfNotPresent
           command:
             - /kubernetes/entrypoint_fpm.sh
@@ -163,7 +163,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/misp/misp-docker/misp-core
-            tag: v2.5.44
+            tag: v2.5.45
             pullPolicy: IfNotPresent
           command:
             - /usr/bin/tini
