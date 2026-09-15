@@ -10,6 +10,7 @@ oauth2-proxy-homepage:
     oidc-issuer-url: https://id.cloud.obara.xyz
     redirect-url: https://homepage.cloud.obara.xyz/oauth2/callback
     code-challenge-method: S256
+    skip-provider-button: "true"
     scope: "openid profile email"
     cookie-secure: "true"
     cookie-domain: homepage.cloud.obara.xyz
@@ -31,6 +32,7 @@ oauth2-proxy-postgresus:
     oidc-issuer-url: https://id.cloud.obara.xyz
     redirect-url: https://databasus.cloud.obara.xyz/oauth2/callback
     code-challenge-method: S256
+    skip-provider-button: "true"
     scope: "openid profile email"
     cookie-secure: "true"
     cookie-domain: databasus.cloud.obara.xyz
@@ -52,6 +54,7 @@ oauth2-proxy-gitea-mirror:
     oidc-issuer-url: https://id.cloud.obara.xyz
     redirect-url: https://forgejo-mirror.cloud.obara.xyz/oauth2/callback
     code-challenge-method: S256
+    skip-provider-button: "true"
     scope: "openid profile email"
     cookie-secure: "true"
     cookie-domain: forgejo-mirror.cloud.obara.xyz
@@ -73,6 +76,7 @@ oauth2-proxy-openbao:
     oidc-issuer-url: https://id.cloud.obara.xyz
     redirect-url: https://bao.cloud.obara.xyz/oauth2/callback
     code-challenge-method: S256
+    skip-provider-button: "true"
     scope: "openid profile email"
     cookie-secure: "true"
     cookie-domain: bao.cloud.obara.xyz
@@ -94,6 +98,7 @@ oauth2-proxy-longhorn:
     oidc-issuer-url: https://id.cloud.obara.xyz
     redirect-url: https://longhorn.cloud.obara.xyz/oauth2/callback
     code-challenge-method: S256
+    skip-provider-button: "true"
     scope: "openid profile email"
     cookie-secure: "true"
     cookie-domain: longhorn.cloud.obara.xyz
