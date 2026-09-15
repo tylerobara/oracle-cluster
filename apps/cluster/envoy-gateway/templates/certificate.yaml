@@ -8,7 +8,6 @@ spec:
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
-  commonName: cloud.obara.xyz
+  commonName: "*.cloud.obara.xyz"
   dnsNames:
-    - "cloud.obara.xyz"
     - "*.cloud.obara.xyz"
