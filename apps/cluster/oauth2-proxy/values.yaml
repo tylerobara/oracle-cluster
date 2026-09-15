@@ -1,0 +1,104 @@
+oauth2-proxy-homepage:
+  fullnameOverride: oauth2-proxy-homepage
+  config:
+    existingSecret: oauth2-proxy-homepage-secret
+    emailDomains: ["*"]
+    upstreams:
+      - http://homepage.default.svc.cluster.local:3000
+  extraArgs:
+    provider: oidc
+    oidc-issuer-url: https://id.cloud.obara.xyz/
+    redirect-url: https://homepage.cloud.obara.xyz/oauth2/callback
+    code-challenge-method: S256
+    scope: "openid profile email"
+    cookie-secure: "true"
+    cookie-domain: homepage.cloud.obara.xyz
+    whitelist-domain: homepage.cloud.obara.xyz
+  service:
+    portNumber: 80
+  ingress:
+    enabled: false
+
+oauth2-proxy-postgresus:
+  fullnameOverride: oauth2-proxy-postgresus
+  config:
+    existingSecret: oauth2-proxy-postgresus-secret
+    emailDomains: ["*"]
+    upstreams:
+      - http://postgresus.default.svc.cluster.local:4005
+  extraArgs:
+    provider: oidc
+    oidc-issuer-url: https://id.cloud.obara.xyz/
+    redirect-url: https://databasus.cloud.obara.xyz/oauth2/callback
+    code-challenge-method: S256
+    scope: "openid profile email"
+    cookie-secure: "true"
+    cookie-domain: databasus.cloud.obara.xyz
+    whitelist-domain: databasus.cloud.obara.xyz
+  service:
+    portNumber: 80
+  ingress:
+    enabled: false
+
+oauth2-proxy-gitea-mirror:
+  fullnameOverride: oauth2-proxy-gitea-mirror
+  config:
+    existingSecret: oauth2-proxy-gitea-mirror-secret
+    emailDomains: ["*"]
+    upstreams:
+      - http://gitea-mirror.development.svc.cluster.local:4321
+  extraArgs:
+    provider: oidc
+    oidc-issuer-url: https://id.cloud.obara.xyz/
+    redirect-url: https://forgejo-mirror.cloud.obara.xyz/oauth2/callback
+    code-challenge-method: S256
+    scope: "openid profile email"
+    cookie-secure: "true"
+    cookie-domain: forgejo-mirror.cloud.obara.xyz
+    whitelist-domain: forgejo-mirror.cloud.obara.xyz
+  service:
+    portNumber: 80
+  ingress:
+    enabled: false
+
+oauth2-proxy-openbao:
+  fullnameOverride: oauth2-proxy-openbao
+  config:
+    existingSecret: oauth2-proxy-openbao-secret
+    emailDomains: ["*"]
+    upstreams:
+      - http://openbao.openbao.svc.cluster.local:8200
+  extraArgs:
+    provider: oidc
+    oidc-issuer-url: https://id.cloud.obara.xyz/
+    redirect-url: https://bao.cloud.obara.xyz/oauth2/callback
+    code-challenge-method: S256
+    scope: "openid profile email"
+    cookie-secure: "true"
+    cookie-domain: bao.cloud.obara.xyz
+    whitelist-domain: bao.cloud.obara.xyz
+  service:
+    portNumber: 80
+  ingress:
+    enabled: false
+
+oauth2-proxy-longhorn:
+  fullnameOverride: oauth2-proxy-longhorn
+  config:
+    existingSecret: oauth2-proxy-longhorn-secret
+    emailDomains: ["*"]
+    upstreams:
+      - http://longhorn-frontend.longhorn-system.svc.cluster.local:80
+  extraArgs:
+    provider: oidc
+    oidc-issuer-url: https://id.cloud.obara.xyz/
+    redirect-url: https://longhorn.cloud.obara.xyz/oauth2/callback
+    code-challenge-method: S256
+    scope: "openid profile email"
+    cookie-secure: "true"
+    cookie-domain: longhorn.cloud.obara.xyz
+    whitelist-domain: longhorn.cloud.obara.xyz
+  service:
+    portNumber: 80
+  ingress:
+    enabled: false

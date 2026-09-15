@@ -1,0 +1,23 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: forgejo
+  namespace: development
+  annotations:
+    gethomepage.dev/href: "https://git.cloud.obara.xyz"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "forgejo"
+    gethomepage.dev/description: "Git Server"
+    gethomepage.dev/group: "Development"
+    gethomepage.dev/icon: "sh-forgejo.svg"
+spec:
+  parentRefs:
+    - name: envoy-gateway
+      namespace: envoy-gateway-system
+      sectionName: websecure
+  hostnames:
+    - git.cloud.obara.xyz
+  rules:
+    - backendRefs:
+        - name: forgejo-http
+          port: 3000

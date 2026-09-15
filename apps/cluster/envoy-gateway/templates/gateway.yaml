@@ -1,0 +1,42 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: envoy-gateway
+  namespace: envoy-gateway-system
+spec:
+  gatewayClassName: envoy-gateway
+  listeners:
+    - name: web
+      protocol: HTTP
+      port: 80
+      hostname: "*.cloud.obara.xyz"
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: websecure
+      protocol: HTTPS
+      port: 443
+      hostname: "*.cloud.obara.xyz"
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: cloud-obara-xyz-tls
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: keycloak-passthrough
+      protocol: TLS
+      port: 443
+      hostname: keycloak.cloud.obara.xyz
+      tls:
+        mode: Passthrough
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: forgejo-ssh
+      protocol: TCP
+      port: 2222
+      allowedRoutes:
+        namespaces:
+          from: All

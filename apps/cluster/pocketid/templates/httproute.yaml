@@ -1,0 +1,23 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: pocketid
+  namespace: default
+  annotations:
+    gethomepage.dev/href: "https://id.cloud.obara.xyz"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "PocketId"
+    gethomepage.dev/description: "IdP"
+    gethomepage.dev/group: "Identity"
+    gethomepage.dev/icon: "sh-pocket-id.png"
+spec:
+  parentRefs:
+    - name: envoy-gateway
+      namespace: envoy-gateway-system
+      sectionName: websecure
+  hostnames:
+    - id.cloud.obara.xyz
+  rules:
+    - backendRefs:
+        - name: pocketid
+          port: 1411

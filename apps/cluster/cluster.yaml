@@ -68,3 +68,16 @@ apps:
     newt:
       deploy: true
       namespace: kube-system
+    envoy-gateway-crds:
+      deploy: true
+      namespace: envoy-gateway-system
+      serverSideApply: true
+    envoy-gateway:
+      deploy: true
+      namespace: envoy-gateway-system
+    oauth2-proxy:
+      deploy: true
+      namespace: oauth2-proxy
+    keycloak-gateway-route:
+      deploy: true
+      namespace: default

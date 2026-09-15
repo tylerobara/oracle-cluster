@@ -1,0 +1,15 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: envoy-gateway-config
+  namespace: envoy-gateway-system
+spec:
+  provider:
+    type: Kubernetes
+    kubernetes:
+      envoyService:
+        type: ClusterIP
+        # Cutover step: flip to
+        #   type: LoadBalancer
+        #   loadBalancerIP: "10.0.0.68"
+        # once all routes are validated (see migration plan Phase 6/7).

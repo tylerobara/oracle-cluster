@@ -1,0 +1,28 @@
+apiVersion: v2
+name: oauth2-proxy
+version: 1.0.0
+
+sources:
+  - https://github.com/oauth2-proxy/oauth2-proxy
+
+dependencies:
+  - name: oauth2-proxy
+    alias: oauth2-proxy-homepage
+    version: 10.7.0
+    repository: https://oauth2-proxy.github.io/manifests
+  - name: oauth2-proxy
+    alias: oauth2-proxy-postgresus
+    version: 10.7.0
+    repository: https://oauth2-proxy.github.io/manifests
+  - name: oauth2-proxy
+    alias: oauth2-proxy-gitea-mirror
+    version: 10.7.0
+    repository: https://oauth2-proxy.github.io/manifests
+  - name: oauth2-proxy
+    alias: oauth2-proxy-openbao
+    version: 10.7.0
+    repository: https://oauth2-proxy.github.io/manifests
+  - name: oauth2-proxy
+    alias: oauth2-proxy-longhorn
+    version: 10.7.0
+    repository: https://oauth2-proxy.github.io/manifests

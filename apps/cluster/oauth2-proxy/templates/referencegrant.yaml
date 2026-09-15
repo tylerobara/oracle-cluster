@@ -1,0 +1,21 @@
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
+metadata:
+  name: allow-httproutes-to-oauth2-proxy
+spec:
+  from:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: default
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: development
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: openbao
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: longhorn-system
+  to:
+    - group: ""
+      kind: Service

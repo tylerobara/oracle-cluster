@@ -1,0 +1,24 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: postgresus
+  namespace: default
+  annotations:
+    gethomepage.dev/href: "https://databasus.cloud.obara.xyz"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "Databasus"
+    gethomepage.dev/description: "Code Sharing"
+    gethomepage.dev/group: "Development"
+    gethomepage.dev/icon: "sh-databasus.svg"
+spec:
+  parentRefs:
+    - name: envoy-gateway
+      namespace: envoy-gateway-system
+      sectionName: websecure
+  hostnames:
+    - databasus.cloud.obara.xyz
+  rules:
+    - backendRefs:
+        - name: oauth2-proxy-postgresus
+          namespace: oauth2-proxy
+          port: 80

@@ -1,0 +1,23 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: haven
+  namespace: default
+  annotations:
+    gethomepage.dev/href: "https://haven.cloud.obara.xyz"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "Haven"
+    gethomepage.dev/description: "Haven Application"
+    gethomepage.dev/group: "Media"
+    gethomepage.dev/icon: "sh-haven.svg"
+spec:
+  parentRefs:
+    - name: envoy-gateway
+      namespace: envoy-gateway-system
+      sectionName: websecure
+  hostnames:
+    - haven.cloud.obara.xyz
+  rules:
+    - backendRefs:
+        - name: haven
+          port: 3000
