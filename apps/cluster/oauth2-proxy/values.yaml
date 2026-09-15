@@ -7,7 +7,7 @@ oauth2-proxy-homepage:
       - http://homepage.default.svc.cluster.local:3000
   extraArgs:
     provider: oidc
-    oidc-issuer-url: https://id.cloud.obara.xyz/
+    oidc-issuer-url: https://id.cloud.obara.xyz
     redirect-url: https://homepage.cloud.obara.xyz/oauth2/callback
     code-challenge-method: S256
     scope: "openid profile email"
@@ -28,7 +28,7 @@ oauth2-proxy-postgresus:
       - http://postgresus.default.svc.cluster.local:4005
   extraArgs:
     provider: oidc
-    oidc-issuer-url: https://id.cloud.obara.xyz/
+    oidc-issuer-url: https://id.cloud.obara.xyz
     redirect-url: https://databasus.cloud.obara.xyz/oauth2/callback
     code-challenge-method: S256
     scope: "openid profile email"
@@ -49,7 +49,7 @@ oauth2-proxy-gitea-mirror:
       - http://gitea-mirror.development.svc.cluster.local:4321
   extraArgs:
     provider: oidc
-    oidc-issuer-url: https://id.cloud.obara.xyz/
+    oidc-issuer-url: https://id.cloud.obara.xyz
     redirect-url: https://forgejo-mirror.cloud.obara.xyz/oauth2/callback
     code-challenge-method: S256
     scope: "openid profile email"
@@ -70,7 +70,7 @@ oauth2-proxy-openbao:
       - http://openbao.openbao.svc.cluster.local:8200
   extraArgs:
     provider: oidc
-    oidc-issuer-url: https://id.cloud.obara.xyz/
+    oidc-issuer-url: https://id.cloud.obara.xyz
     redirect-url: https://bao.cloud.obara.xyz/oauth2/callback
     code-challenge-method: S256
     scope: "openid profile email"
@@ -91,7 +91,7 @@ oauth2-proxy-longhorn:
       - http://longhorn-frontend.longhorn-system.svc.cluster.local:80
   extraArgs:
     provider: oidc
-    oidc-issuer-url: https://id.cloud.obara.xyz/
+    oidc-issuer-url: https://id.cloud.obara.xyz
     redirect-url: https://longhorn.cloud.obara.xyz/oauth2/callback
     code-challenge-method: S256
     scope: "openid profile email"
