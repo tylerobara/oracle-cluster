@@ -19,5 +19,6 @@ spec:
     - haven.cloud.obara.xyz
   rules:
     - backendRefs:
-        - name: haven
-          port: 3000
+        - group: gateway.envoyproxy.io
+          kind: Backend
+          name: haven-tls

@@ -1,0 +1,12 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: Backend
+metadata:
+  name: haven-tls
+  namespace: default
+spec:
+  endpoints:
+    - fqdn:
+        hostname: haven.default.svc.cluster.local
+        port: 3000
+  tls:
+    insecureSkipVerify: true
