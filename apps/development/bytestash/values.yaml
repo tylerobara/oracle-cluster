@@ -64,13 +64,13 @@ bytestash:
 
   ingress:
     bytestash:
-      annotations: 
+      annotations:
         kubernetes.io/ingress.class: traefik
         gethomepage.dev/href: "https://stash.cloud.obara.xyz"
         gethomepage.dev/enabled: "true"
         gethomepage.dev/name: "bytestash"
         gethomepage.dev/description: "Code Sharing"
-        gethomepage.dev/group: "Development"
+        gethomepage.dev/group: "Services"
         gethomepage.dev/icon: "sh-bytestash.svg"
       className: "traefik"
       hosts:

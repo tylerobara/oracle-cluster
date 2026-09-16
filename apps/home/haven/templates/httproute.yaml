@@ -8,7 +8,7 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "Haven"
     gethomepage.dev/description: "Haven Application"
-    gethomepage.dev/group: "Media"
+    gethomepage.dev/group: "Services"
     gethomepage.dev/icon: "sh-haven.svg"
 spec:
   parentRefs:

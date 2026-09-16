@@ -1,20 +1,6 @@
 haven:
   ingress:
     enabled: false
-    className: "traefik"
-    annotations:
-      gethomepage.dev/href: "https://haven.cloud.obara.xyz"
-      gethomepage.dev/enabled: "true"
-      gethomepage.dev/name: "Haven"
-      gethomepage.dev/description: "Haven Application"
-      gethomepage.dev/group: "Media"
-      gethomepage.dev/icon: "sh-haven.svg"
-    hosts:
-      - host: haven.cloud.obara.xyz
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-    tls: []
 
   service:
     annotations:

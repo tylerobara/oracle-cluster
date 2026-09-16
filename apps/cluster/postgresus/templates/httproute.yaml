@@ -8,7 +8,7 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "Databasus"
     gethomepage.dev/description: "Code Sharing"
-    gethomepage.dev/group: "Development"
+    gethomepage.dev/group: "Services"
     gethomepage.dev/icon: "sh-databasus.svg"
 spec:
   parentRefs:

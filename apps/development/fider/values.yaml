@@ -83,7 +83,7 @@ fider:
         gethomepage.dev/enabled: "true"
         gethomepage.dev/name: "Fider"
         gethomepage.dev/description: "Feedback and Ideas"
-        gethomepage.dev/group: "Development"
+        gethomepage.dev/group: "Services"
         gethomepage.dev/icon: "sh-fider.png"
         # traefik.ingress.kubernetes.io/router.middlewares: traefik-traefik-oidc-auth@kubernetescrd
       className: "traefik"

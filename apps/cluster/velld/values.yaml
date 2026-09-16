@@ -52,7 +52,7 @@ app-template:
   #       gethomepage.dev/enabled: "true"
   #       gethomepage.dev/name: "velld"
   #       gethomepage.dev/description: "Database Backup"
-  #       gethomepage.dev/group: "Misc"
+  #       gethomepage.dev/group: "Services"
   #       gethomepage.dev/icon: "sh-velld.png"
   #     hosts:
   #       - host: velld.cloud.obara.xyz

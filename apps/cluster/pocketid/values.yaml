@@ -56,22 +56,6 @@ app-template:
   ingress:
     pocketid:
       enabled: false
-      annotations:
-        kubernetes.io/ingress.class: traefik
-        gethomepage.dev/href: "https://id.cloud.obara.xyz"
-        gethomepage.dev/enabled: "true"
-        gethomepage.dev/name: "PocketId"
-        gethomepage.dev/description: "IdP"
-        gethomepage.dev/group: "Identity"
-        gethomepage.dev/icon: "sh-pocket-id.png"
-      hosts:
-        - host: id.cloud.obara.xyz
-          paths:
-            - path: /
-              pathType: Prefix
-              service:
-                identifier: pocketid
-                port: http
 
   persistence:
     pocketid:

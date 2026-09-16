@@ -22,19 +22,3 @@ scribblers:
   ingress:
     scribblers:
       enabled: false
-      annotations:
-        kubernetes.io/ingress.class: traefik
-        gethomepage.dev/href: "https://scribble.{{ .Values.global.domain }}"
-        gethomepage.dev/enabled: "true"
-        gethomepage.dev/name: "Scribble.Rs"
-        gethomepage.dev/description: "online tools to simplify everyday tasks"
-        gethomepage.dev/group: "Games"
-      className: "traefik"
-      hosts:
-        - host: scribble.{{ .Values.global.domain }}
-          paths:
-            - path: /
-              pathType: Prefix
-              service:
-                identifier: scribblers
-                port: http
