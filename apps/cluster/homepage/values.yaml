@@ -17,7 +17,7 @@ homepage:
           - ArtifactHub:
             - abbr: AH
               href: https://artifacthub.io/
-    services:
+    services: []
 
     widgets:
     kubernetes:
