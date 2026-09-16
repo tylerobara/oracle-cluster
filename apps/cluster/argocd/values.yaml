@@ -2,6 +2,26 @@ argocd:
   server:
     ingress:
       enabled: false
+    httproute:
+      enabled: true
+      annotations:
+        gethomepage.dev/href: "https://argo.cloud.obara.xyz"
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/name: "ArgoCD"
+        gethomepage.dev/description: "Continuous Delivery"
+        gethomepage.dev/group: "Services"
+        gethomepage.dev/icon: "sh-argo-cd.svg"
+      parentRefs:
+        - name: envoy-gateway
+          namespace: envoy-gateway-system
+          sectionName: websecure
+      hostnames:
+        - argo.cloud.obara.xyz
+      rules:
+        - backendRefs:
+            - group: gateway.envoyproxy.io
+              kind: Backend
+              name: argocd-server-tls
   configs:
     cm:
       admin.enabled: "false"
