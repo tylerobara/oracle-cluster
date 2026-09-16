@@ -8,6 +8,27 @@ spec:
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
-  commonName: "*.cloud.obara.xyz"
+  commonName: "haven.cloud.obara.xyz"
   dnsNames:
-    - "*.cloud.obara.xyz"
+    - "haven.cloud.obara.xyz"
+    - "scribble.cloud.obara.xyz"
+    - "auth.cloud.obara.xyz"
+    - "id.cloud.obara.xyz"
+    - "git.cloud.obara.xyz"
+    - "argo.cloud.obara.xyz"
+    - "homepage.cloud.obara.xyz"
+    - "databasus.cloud.obara.xyz"
+    - "forgejo-mirror.cloud.obara.xyz"
+    - "bao.cloud.obara.xyz"
+    - "longhorn.cloud.obara.xyz"
+    - "traefik.cloud.obara.xyz"
+  # Deliberately NOT a wildcard, and deliberately excludes
+  # keycloak.cloud.obara.xyz: a shared wildcard cert lets Chrome's
+  # HTTP/2 connection coalescing reuse an already-open connection to
+  # any other *.cloud.obara.xyz host when navigating to Keycloak
+  # (since the wildcard is technically valid for it too), landing the
+  # request on this Terminate listener's HTTP router -- which has no
+  # route for Keycloak (that only exists on the separate TLS-passthrough
+  # listener) -- producing an intermittent 404. An explicit SAN list
+  # that excludes Keycloak's hostname makes this cert invalid for it,
+  # forcing a fresh connection (and correct SNI) every time.
