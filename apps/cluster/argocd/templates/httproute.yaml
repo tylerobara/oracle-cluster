@@ -19,5 +19,6 @@ spec:
     - argo.cloud.obara.xyz
   rules:
     - backendRefs:
-        - name: argocd-server
-          port: 80
+        - group: gateway.envoyproxy.io
+          kind: Backend
+          name: argocd-server-tls
