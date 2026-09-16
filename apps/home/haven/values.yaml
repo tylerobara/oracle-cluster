@@ -1,6 +1,6 @@
 haven:
   ingress:
-    enabled: true
+    enabled: false
     className: "traefik"
     annotations:
       gethomepage.dev/href: "https://haven.cloud.obara.xyz"

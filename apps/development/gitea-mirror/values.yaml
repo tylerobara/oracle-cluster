@@ -33,7 +33,8 @@ gitea-mirror:
 
   ingress:
     gitea-mirror:
-      annotations: 
+      enabled: false
+      annotations:
         kubernetes.io/ingress.class: traefik
         gethomepage.dev/href: "https://forgejo-mirror.cloud.obara.xyz"
         gethomepage.dev/enabled: "true"

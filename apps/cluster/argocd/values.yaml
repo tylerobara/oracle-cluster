@@ -1,7 +1,7 @@
 argocd:
   server:
     ingress:
-      enabled: true
+      enabled: false
       ingressClassName: traefik
       hostname: argo.cloud.obara.xyz
       annotations:

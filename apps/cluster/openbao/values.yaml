@@ -3,7 +3,7 @@ openbao:
     dataStorage:
       size: 2Gi
     ingress:
-      enabled: true
+      enabled: false
       annotations:
         kubernetes.io/ingress.class: traefik
         gethomepage.dev/href: "https://bao.cloud.obara.xyz"

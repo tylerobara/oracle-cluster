@@ -55,7 +55,8 @@ app-template:
 
   ingress:
     pocketid:
-      annotations: 
+      enabled: false
+      annotations:
         kubernetes.io/ingress.class: traefik
         gethomepage.dev/href: "https://id.cloud.obara.xyz"
         gethomepage.dev/enabled: "true"

@@ -8,8 +8,5 @@ spec:
     type: Kubernetes
     kubernetes:
       envoyService:
-        type: ClusterIP
-        # Cutover step: flip to
-        #   type: LoadBalancer
-        #   loadBalancerIP: "10.0.0.68"
-        # once all routes are validated (see migration plan Phase 6/7).
+        type: LoadBalancer
+        loadBalancerIP: "10.0.0.68"

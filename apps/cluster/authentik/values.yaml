@@ -76,7 +76,7 @@ authentik:
 
     ingress:
       ingressClassName: "traefik"
-      enabled: true
+      enabled: false
       hosts:
         - auth.cloud.obara.xyz
 

@@ -28,7 +28,7 @@ apps:
       deploy: true
       namespace: default
     traefik:
-      deploy: true
+      deploy: false
       namespace: traefik
     guacamole:
       deploy: false
@@ -63,7 +63,7 @@ apps:
       deploy: true
       namespace: kube-system
     authentik:
-      deploy: true
+      deploy: false
       namespace: default
     newt:
       deploy: true
