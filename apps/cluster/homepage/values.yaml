@@ -22,7 +22,8 @@ homepage:
     widgets:
     kubernetes:
       mode: default
-      traefik: true
+      traefik: false
+      gateway: true
       # ingress: true
     settings:
       layout:
