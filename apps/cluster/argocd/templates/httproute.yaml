@@ -1,24 +1,24 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: haven
-  namespace: default
+  name: argocd-server
+  namespace: argocd
   annotations:
-    gethomepage.dev/href: "https://haven.cloud.obara.xyz"
+    gethomepage.dev/href: "https://argo.cloud.obara.xyz"
     gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: "Haven"
-    gethomepage.dev/description: "Haven Application"
+    gethomepage.dev/name: "ArgoCD"
+    gethomepage.dev/description: "Continuous Delivery"
     gethomepage.dev/group: "Services"
-    gethomepage.dev/icon: "https://github.com/ancsemi/Haven/raw/refs/heads/main/public/icon-512.svg"
+    gethomepage.dev/icon: "sh-argo-cd.svg"
 spec:
   parentRefs:
     - name: envoy-gateway
       namespace: envoy-gateway-system
       sectionName: websecure
   hostnames:
-    - haven.cloud.obara.xyz
+    - argo.cloud.obara.xyz
   rules:
     - backendRefs:
         - group: gateway.envoyproxy.io
           kind: Backend
-          name: haven-tls
+          name: argocd-server-tls
