@@ -25,6 +25,9 @@ cache:
   clusterName: forgejo
 
 forgejo:
+  image:
+    tag: 16.0.4-rootless
+    digest: sha256:a263a1298e89e0bdf019005ce1927e9aadaa8f1bd2a94a3e66ad94e2a89e19ce
   service:
     ssh:
       port: 2222
