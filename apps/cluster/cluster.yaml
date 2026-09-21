@@ -62,6 +62,16 @@ apps:
     cert-manager:
       deploy: true
       namespace: kube-system
+      serverSideApply: true
+      ignoreDifferences:
+      - group: admissionregistration.k8s.io
+        kind: MutatingWebhookConfiguration
+        jqPathExpressions:
+        - .webhooks[].clientConfig.caBundle
+      - group: admissionregistration.k8s.io
+        kind: ValidatingWebhookConfiguration
+        jqPathExpressions:
+        - .webhooks[].clientConfig.caBundle
     authentik:
       deploy: false
       namespace: default

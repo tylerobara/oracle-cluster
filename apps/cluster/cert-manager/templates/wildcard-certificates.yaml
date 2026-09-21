@@ -1,0 +1,57 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cloud-obara-xyz-tls
+  namespace: envoy-gateway-system
+spec:
+  secretName: cloud-obara-xyz-tls
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "*.cloud.obara.xyz"
+  dnsNames:
+    - "*.cloud.obara.xyz"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cloud-obara-xyz-tls
+  namespace: default
+spec:
+  secretName: cloud-obara-xyz-tls
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "*.cloud.obara.xyz"
+  dnsNames:
+    - "*.cloud.obara.xyz"
+---
+# Legacy copies, kept managed until confirmed unused, then delete.
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cloud-obara-xyz-tls
+  namespace: kube-system
+spec:
+  secretName: cloud-obara-xyz-tls
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "*.cloud.obara.xyz"
+  dnsNames:
+    - "*.cloud.obara.xyz"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cloud-obara-xyz-tls
+  namespace: traefik
+spec:
+  secretName: cloud-obara-xyz-tls
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "*.cloud.obara.xyz"
+  dnsNames:
+    - "*.cloud.obara.xyz"
