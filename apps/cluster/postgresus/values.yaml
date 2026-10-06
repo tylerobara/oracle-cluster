@@ -31,6 +31,6 @@ postgresus:
     data:
       type: persistentVolumeClaim
       accessMode: ReadWriteOnce
-      size: 100Mi
+      size: 5Gi
       globalMounts:
         - path: /databasus-data
