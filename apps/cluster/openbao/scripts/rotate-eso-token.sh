@@ -8,7 +8,7 @@ command -v bao >/dev/null || { echo "missing bao CLI: brew tap openbao/openbao &
 kubectl --context oracle port-forward -n openbao svc/openbao 8200:8200 &>/dev/null & PF=$!
 trap 'kill $PF 2>/dev/null' EXIT
 export BAO_ADDR=http://localhost:8200
-bao login -method=oidc openbao-admin >/dev/null
+bao login -method=oidc role=openbao-admin >/dev/null
 [[ -n "${BAO_TOKEN:-}" && -n "${BAO_TOKEN_EXPIRATION_TIME:-}" ]] || { echo "OIDC login failed" >&2; exit 1; }
 
 # dedicated read-only policy (idempotent; map payload via stdin JSON)
