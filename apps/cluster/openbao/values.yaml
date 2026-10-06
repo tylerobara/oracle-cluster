@@ -4,8 +4,20 @@ openbao:
       size: 2Gi
     ingress:
       enabled: false
-    ha:
-      enabled: false
-      replicas: 3
-    raft:
+    # Existing data on the PVC is a file-backend store at /openbao/data
+    # (core/, logical/, sys/). The 0.30.x chart ignores the old ha/raft keys
+    # and would default to a fresh pebbledb store, so pin the config here.
+    standalone:
       enabled: true
+      config: |
+        ui = true
+
+        listener "tcp" {
+          tls_disable = 1
+          address = "[::]:8200"
+          cluster_address = "[::]:8201"
+        }
+
+        storage "file" {
+          path = "/openbao/data"
+        }
