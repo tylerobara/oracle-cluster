@@ -1,4 +1,8 @@
 postgresus:
+  defaultPodOptions:
+    securityContext:
+      fsGroup: 999
+
   controllers:
     postgresus:
       strategy: Recreate
