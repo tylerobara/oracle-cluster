@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
-# Creates/rotates the least-privilege token external-secrets uses to read
-# openbao (store: oracle-cluster-secret-store, mount: oracle/).
+# Creates/rotates the token external-secrets uses to read openbao
+# (store: oracle-cluster-secret-store, KV mount: oracle/).
+# Flow: OIDC login (browser) -> ensure policy + token-store role -> issue
+# token via the role (bypasses "child policies must be subset of parent")
+# -> update bao-token secret -> restart ESO.
+# Note: tokens self-expire 32d after issue (backend max_lease cap); re-run
+# this script about monthly, or before a token expires.
 # Requires: bao CLI (brew tap openbao/openbao && brew install openbao), kubectl 'oracle' context.
 set -euo pipefail
 command -v bao >/dev/null || { echo "missing bao CLI: brew tap openbao/openbao && brew install openbao" >&2; exit 1; }
@@ -22,17 +27,20 @@ echo "port-forward ready (pid $PF)"
 
 export BAO_ADDR=http://localhost:8200
 printf "Logging in to OpenBao via OIDC — watch for a browser window...\n"
-bao login -method=oidc role=openbao-admin >/dev/null
-[[ -n "${BAO_TOKEN:-}" && -n "${BAO_TOKEN_EXPIRATION_TIME:-}" ]] || { echo "OIDC login failed" >&2; exit 1; }
+bao login -method=oidc role=openbao-admin >/dev/null \
+  || { echo "OIDC login failed" >&2; exit 1; }
+bao token lookup >/dev/null 2>&1 || { echo "no usable session token after login" >&2; exit 1; }
 
-# dedicated read-only policy (idempotent; map payload via stdin JSON)
-echo '{"policy":{"oracle/data/*":{"capabilities":["read","list"]}}}' \
-  | bao write -f sys/policies/acl/external-secrets - >/dev/null
+POLICY_FILE=$(mktemp)
+printf 'path "oracle/data/*" {\n  capabilities = ["read", "list"]\n}\n' > "$POLICY_FILE"
+bao policy write external-secrets "$POLICY_FILE" >/dev/null
+rm -f "$POLICY_FILE"
 
-# service token, renewable, renews itself indefinitely (period 1y)
-TOK=$(bao token create -policy=external-secrets -ttl=8760h -period=8760h \
-  -renewable=true -no-default-policy=true -type=service -format=json \
-  | python3 -c 'import json,sys; print(json.load(sys.stdin)["auth"]["client_token"]["token"])')
+echo '{"token_policies":["external-secrets"],"allowed_policies":["external-secrets"],"disallowed_policies":["admin","root"],"renewable":true,"token_type":"service","token_period":"8760h","no_default_policy":true}' \
+  | bao write -f auth/token/roles/external-secrets - >/dev/null
+
+TOK=$(bao token create -role=external-secrets -format=json \
+  | python3 -c 'import json,sys; print(json.load(sys.stdin)["auth"]["client_token"])')
 
 kubectl --context oracle -n external-secrets create secret generic bao-token \
   --from-literal=token="$TOK" --dry-run=client -o yaml \
@@ -40,4 +48,4 @@ kubectl --context oracle -n external-secrets create secret generic bao-token \
 unset TOK
 
 kubectl --context oracle rollout restart deploy/external-secrets -n external-secrets
-echo "done: bao-token replaced with least-privilege token, ESO restarted"
+echo "done: bao-token rotated via token-store role, ESO restarted"
