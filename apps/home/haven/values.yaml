@@ -13,4 +13,4 @@ haven:
 
   image:
     repository: ghcr.io/ancsemi/haven
-    tag: 4.18.0
+    tag: 4.19.0
