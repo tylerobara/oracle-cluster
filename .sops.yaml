@@ -1,0 +1,3 @@
+creation_rules:
+  - path_regex: apps/.*/secrets/
+    age: "age1dmjpkefgs4vlldchekez5tlku88ssm9qa7ahvl0gcslsr9znyvwsd5synz"

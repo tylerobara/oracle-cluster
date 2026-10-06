@@ -1,1 +1,4 @@
 scratch.txt
+# plaintext secrets (sops-encrypt into *.sops.yaml before committing)
+apps/**/secrets/*.yaml
+!apps/**/secrets/*.sops.yaml
