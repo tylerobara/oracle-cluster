@@ -7,5 +7,5 @@ sources:
 
 dependencies:
   - name: traefik
-    version: 41.6.1
+    version: 41.7.0
     repository: https://traefik.github.io/charts
