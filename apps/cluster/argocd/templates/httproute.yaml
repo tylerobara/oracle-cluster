@@ -12,13 +12,20 @@ metadata:
     gethomepage.dev/icon: "sh-argo-cd.svg"
 spec:
   parentRefs:
-    - name: envoy-gateway
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: envoy-gateway
       namespace: envoy-gateway-system
       sectionName: websecure
   hostnames:
     - argo.cloud.obara.xyz
   rules:
-    - backendRefs:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
         - group: gateway.envoyproxy.io
           kind: Backend
           name: argocd-server-tls
+          weight: 1
