@@ -1,0 +1,37 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: cnpg
+  labels:
+    app.kubernetes.io/component: "db"
+
+spec:
+  instances: 1
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    name: postgis-standard-trixie
+    major: 18
+
+  postgresql:
+    pg_hba:
+      - local replication all peer map=local # required for Klio WAL streaming
+
+  plugins:
+    - name: klio.cnpg.io
+      enabled: true
+      parameters:
+        pluginConfigurationRef: klio-cnpg
+
+  storage:
+    size: 20Gi
+    storageClass: "longhorn"
+
+  managed:
+    roles:
+    - name: keycloak
+      login: true
+      ensure: present
+      superuser: false
+      passwordSecret:
+        name: cnpg-keycloak-role

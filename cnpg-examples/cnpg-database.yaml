@@ -1,0 +1,11 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: keycloak-db
+  labels:
+    app.kubernetes.io/component: "db"
+spec:
+  name: keycloak-db
+  owner: keycloak
+  cluster:
+    name: cnpg
