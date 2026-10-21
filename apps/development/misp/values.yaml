@@ -191,7 +191,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/misp/misp-docker/misp-modules
-            tag: v3.0.12
+            tag: v3.1.0
             pullPolicy: IfNotPresent
           probes:
             readiness:
