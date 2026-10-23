@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubeinspect
+  labels:
+    app.kubernetes.io/name: kubeinspect
+spec:
+  # Single replica: the scan scheduler has no distributed lock.
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kubeinspect
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kubeinspect
+    spec:
+      imagePullSecrets:
+        - name: kubeinspect-registry
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+      containers:
+        - name: server
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: KUBEINSPECT_DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.clusterName }}-app
+                  key: uri
+            - name: KUBEINSPECT_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: kubeinspect-secrets
+                  key: jwt_secret
+            - name: KUBEINSPECT_BOOTSTRAP_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: kubeinspect-secrets
+                  key: bootstrap_token
+            - name: KUBEINSPECT_ADMIN_EMAIL
+              value: tyler.obara@gmail.com
+            - name: KUBEINSPECT_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: kubeinspect-secrets
+                  key: admin_password
+            # The server image is distroless (no Trivy binary), so the
+            # server-side fallback scanner can't run.
+            - name: KUBEINSPECT_LOCAL_SCANS
+              value: "false"
+          readinessProbe:
+            tcpSocket:
+              port: http
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubeinspect
+spec:
+  selector:
+    app.kubernetes.io/name: kubeinspect
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http

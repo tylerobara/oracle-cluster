@@ -6,3 +6,6 @@ apps:
     haven:
       deploy: true
       namespace: default
+    kubeinspect:
+      deploy: true
+      namespace: kubeinspect

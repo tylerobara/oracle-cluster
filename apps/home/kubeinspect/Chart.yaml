@@ -1,0 +1,3 @@
+apiVersion: v2
+name: kubeinspect
+version: 1.0.0
