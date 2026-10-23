@@ -1,0 +1,19 @@
+image:
+  repository: gitea.obara.xyz/tylerobara/kubeinspect-server
+  tag: 0.1.0
+
+host: kubeinspect.cloud.obara.xyz
+
+database:
+  clusterName: kubeinspect
+  image: ghcr.io/tylerobara/containers/cnpg-postgres:18
+  instances: 1
+  size: 5Gi
+  storageClass: longhorn
+
+# OpenBao (KV mount oracle/) paths backing the ExternalSecrets.
+# home/kubeinspect:          jwt_secret, bootstrap_token, admin_password
+# home/kubeinspect-registry: dockerconfigjson (pull secret for gitea.obara.xyz)
+secretStoreRef:
+  name: oracle-cluster-secret-store
+  kind: ClusterSecretStore
