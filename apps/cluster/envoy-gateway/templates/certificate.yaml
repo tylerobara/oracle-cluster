@@ -22,6 +22,7 @@ spec:
     - "bao.cloud.obara.xyz"
     - "longhorn.cloud.obara.xyz"
     - "traefik.cloud.obara.xyz"
+    - "kubeinspect.cloud.obara.xyz"
   # Deliberately NOT a wildcard, and deliberately excludes
   # keycloak.cloud.obara.xyz: a shared wildcard cert lets Chrome's
   # HTTP/2 connection coalescing reuse an already-open connection to
