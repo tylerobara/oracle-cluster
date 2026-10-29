@@ -51,10 +51,16 @@ spec:
                 secretKeyRef:
                   name: kubeinspect-secrets
                   key: admin_password
-            # The server image is distroless (no Trivy binary), so the
-            # server-side fallback scanner can't run.
+            # Trivy is bundled in the image to serve the vulnerability DB to
+            # agents (KUBEINSPECT_TRIVY_PROXY); this only disables the
+            # server-side local-scan fallback.
             - name: KUBEINSPECT_LOCAL_SCANS
               value: "false"
+          volumeMounts:
+            # The bundled trivy writes its DB/artifact cache to
+            # /tmp/trivy-cache, and the root filesystem is read-only.
+            - name: tmp
+              mountPath: /tmp
           readinessProbe:
             tcpSocket:
               port: http
@@ -68,7 +74,11 @@ spec:
               cpu: 50m
               memory: 128Mi
             limits:
-              memory: 512Mi
+              # Holds the trivy vulnerability DB while the proxy is serving it.
+              memory: 1Gi
+      volumes:
+        - name: tmp
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
