@@ -10,7 +10,7 @@ postgresus:
         main:
           image:
             repository: databasus/databasus
-            tag: v3.67.2
+            tag: v3.68.0
             pullPolicy: IfNotPresent
           env:
             - name: IS_DISABLE_CLOUD_NOTICE
