@@ -6,7 +6,7 @@ host: kubeinspect.cloud.obara.xyz
 
 database:
   clusterName: kubeinspect
-  image: ghcr.io/tylerobara/containers/cnpg-postgres:18
+  image: ghcr.io/tylerobara/containers/cnpg-postgres:19
   instances: 1
   size: 5Gi
   storageClass: longhorn
